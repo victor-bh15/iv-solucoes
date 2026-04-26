@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 
 const SYSTEM_PROMPT = `Você é o Gênio, assistente virtual da IV Soluções em IA.
 A IV Soluções é uma empresa brasileira especializada em soluções de inteligência artificial, fundada por Inamar Miranda e Victor Andrade.
@@ -14,15 +14,17 @@ Serviços que oferecemos:
 - Integração de APIs: conectamos ferramentas com IA centralizada
 - Treinamento de Equipes: capacitação com as melhores ferramentas de IA
 
-Para contato direto: WhatsApp +55 31 98449-6889
+Para contato direto: WhatsApp +55 31 99671-5639
 Site: ivsolucoesia.com.br
 
 Se perguntas fugirem do escopo de IA e tecnologia, redirecione educadamente ao nosso time.`;
 
+const apiKey = process.env.GEMINI_API_KEY!;
+const ai = new GoogleGenAI({ apiKey });
+
 export async function POST(req: NextRequest) {
   try {
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
+    if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json(
         { response: 'Serviço de IA temporariamente indisponível.' },
         { status: 503 }
@@ -39,20 +41,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ response: 'Mensagem inválida.' }, { status: 400 });
     }
 
-    // Convert {role, content} → Gemini format {role, parts:[{text}]}
-    const converted = (history ?? []).map((e) => ({
-      role: e.role,
-      parts: [{ text: e.content }],
-    }));
-
-    // Enforce strict alternation: keep the *last* entry when two consecutive same-role
-    // messages appear (e.g. the uiOnly transition message that the client already excluded,
-    // but just in case any duplicate slips through).
-    const alternated: typeof converted = [];
-    for (const entry of converted) {
+    // Enforce strict alternation: keep the *last* entry of consecutive same-role messages
+    const alternated: typeof history = [];
+    for (const entry of history ?? []) {
       const prev = alternated[alternated.length - 1];
       if (prev && prev.role === entry.role) {
-        alternated[alternated.length - 1] = entry; // replace with the later duplicate
+        alternated[alternated.length - 1] = entry;
       } else {
         alternated.push(entry);
       }
@@ -62,20 +56,21 @@ export async function POST(req: NextRequest) {
     const firstUserIdx = alternated.findIndex((e) => e.role === 'user');
     const safeHistory = firstUserIdx === -1 ? [] : alternated.slice(firstUserIdx);
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
+    const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
-      systemInstruction: systemContext ?? SYSTEM_PROMPT,
+      contents: [
+        ...safeHistory.map((m) => ({
+          role: m.role,
+          parts: [{ text: m.content }],
+        })),
+        { role: 'user', parts: [{ text: message }] },
+      ],
+      config: {
+        systemInstruction: systemContext ?? SYSTEM_PROMPT,
+      },
     });
 
-    const chat = model.startChat({
-      history: safeHistory,
-      generationConfig: { maxOutputTokens: 600, temperature: 0.7 },
-    });
-
-    const result = await chat.sendMessage(message);
-    const text = result.response.text();
-
+    const text = response.text ?? 'Desculpe, não foi possível obter uma resposta.';
     return NextResponse.json({ response: text });
   } catch (error) {
     console.error('[chat/route] Gemini error:', error);
