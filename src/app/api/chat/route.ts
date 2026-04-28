@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 
+export const runtime = 'edge';
 export const maxDuration = 30;
 
 const SYSTEM_PROMPT = `Você é o Gênio, assistente virtual da IV Soluções em IA.
