@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 
+export const maxDuration = 30;
+
 const SYSTEM_PROMPT = `Você é o Gênio, assistente virtual da IV Soluções em IA.
 A IV Soluções é uma empresa brasileira especializada em soluções de inteligência artificial, fundada por Inamar Miranda e Victor Andrade.
 Você é prestativo, profissional, direto e sempre responde em português do Brasil.
@@ -57,7 +59,7 @@ export async function POST(req: NextRequest) {
     const safeHistory = firstUserIdx === -1 ? [] : alternated.slice(firstUserIdx);
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-2.5-flash-lite',
       contents: [
         ...safeHistory.map((m) => ({
           role: m.role,
