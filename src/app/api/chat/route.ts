@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 
-export const runtime = 'edge';
 export const maxDuration = 30;
 
 const SYSTEM_PROMPT = `Você é o Gênio, assistente virtual da IV Soluções em IA.
@@ -59,7 +58,7 @@ export async function POST(req: NextRequest) {
     const firstUserIdx = alternated.findIndex((e) => e.role === 'user');
     const safeHistory = firstUserIdx === -1 ? [] : alternated.slice(firstUserIdx);
 
-    const response = await ai.models.generateContent({
+    const geminiStream = await ai.models.generateContentStream({
       model: 'gemini-2.5-flash-lite',
       contents: [
         ...safeHistory.map((m) => ({
@@ -73,8 +72,29 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const text = response.text ?? 'Desculpe, não foi possível obter uma resposta.';
-    return NextResponse.json({ response: text });
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of geminiStream) {
+            const text = chunk.text ?? '';
+            if (text) controller.enqueue(encoder.encode(text));
+          }
+        } catch (err) {
+          controller.error(err);
+        } finally {
+          controller.close();
+        }
+      },
+    });
+
+    return new Response(readable, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+        'X-Content-Type-Options': 'nosniff',
+      },
+    });
   } catch (error) {
     console.error('[chat/route] Gemini error:', error);
     return NextResponse.json(
