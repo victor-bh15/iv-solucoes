@@ -132,8 +132,33 @@ export default function ChatBot() {
             systemContext: SYSTEM_PROMPT,
           }),
         })
-        const data = await res.json()
-        push('assistant', data.response ?? 'Desculpe, não consegui processar. Tente novamente.')
+
+        if (!res.ok || !res.body) {
+          push('assistant', 'Desculpe, não consegui processar. Tente novamente.')
+          return
+        }
+
+        // Stream started — esconde o indicador de "digitando" e abre a bolha da resposta
+        setLoading(false)
+        setMessages(prev => [...prev, { role: 'assistant', content: '' }])
+
+        const reader = res.body.getReader()
+        const decoder = new TextDecoder()
+
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
+          const chunk = decoder.decode(value, { stream: true })
+          // Acumula o texto no último balão do assistente
+          setMessages(prev => {
+            const copy = [...prev]
+            const last = copy[copy.length - 1]
+            if (last?.role === 'assistant') {
+              copy[copy.length - 1] = { ...last, content: last.content + chunk }
+            }
+            return copy
+          })
+        }
       } catch {
         push('assistant', 'Desculpe, ocorreu um erro. Tente novamente.')
       } finally {
