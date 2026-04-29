@@ -97,7 +97,7 @@ export default function Contact() {
                   <Phone size={20} className="text-[#C8741A]" aria-hidden="true" />
                 </div>
                 <span className="text-[#F5F5F5] font-semibold" style={{ fontFamily: 'Syne, sans-serif' }}>
-                  Telefone
+                  {t('contact_phone')}
                 </span>
               </div>
               <p className="text-[#8A8A8A] text-sm">+55 31 98449-6889</p>
@@ -126,7 +126,7 @@ export default function Contact() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="João Silva"
+                    placeholder={t('contact_name_placeholder')}
                     required
                     className={inputClass}
                   />
@@ -155,7 +155,7 @@ export default function Contact() {
                   id="contact-message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Conte um pouco sobre o seu projeto..."
+                  placeholder={t('contact_message_placeholder')}
                   rows={5}
                   required
                   className={`${inputClass} resize-none`}

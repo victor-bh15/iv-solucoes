@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Lottie from 'lottie-react'
+import animationData from '../../public/ai-animation.json'
 import { MessageCircle, X, Send } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import emailjs from '@emailjs/browser'
@@ -50,8 +52,8 @@ export default function ChatBot() {
   const [loading, setLoading]   = useState(false)
   const [userInfo, setUserInfo] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
+  const inputRef  = useRef<HTMLInputElement>(null)
 
-  // 3. Inicializar EmailJS
   useEffect(() => {
     emailjs.init('U19Oc-PSSnv2R8RBV')
   }, [])
@@ -69,7 +71,6 @@ export default function ChatBot() {
     setInput('')
     push('user', text)
 
-    // 4. Etapa de coleta: validar contato antes de avançar para FORWARDING
     if (step === 'greeting' || step === 'collecting') {
       if (!hasValidContact(text)) {
         setLoading(true)
@@ -80,6 +81,7 @@ export default function ChatBot() {
           )
           setStep('collecting')
           setLoading(false)
+          inputRef.current?.focus()
         }, 800)
         return
       }
@@ -102,11 +104,10 @@ export default function ChatBot() {
       try {
         const allMsgs = [...messages, { role: 'user' as const, content: text }]
 
-        // 6. Excluir mensagens uiOnly do histórico — a mensagem de transição
-        //    do "Não, obrigado" só existe na UI, nunca chega ao Gemini.
+        // Exclui mensagens uiOnly — a mensagem de transição do "Não, obrigado"
+        // só existe na UI, nunca chega ao Gemini.
         const apiMsgs = allMsgs.filter(m => !m.uiOnly)
 
-        // Pega só as mensagens a partir da primeira do usuário, excluindo a atual
         const firstUser = apiMsgs.findIndex(m => m.role === 'user')
         const sliced = apiMsgs.slice(firstUser, -1)
 
@@ -115,12 +116,11 @@ export default function ChatBot() {
         let lastRole: string | null = null
         for (const m of sliced) {
           const role = m.role === 'assistant' ? 'model' : 'user'
-          if (role === lastRole) continue // pula mensagens consecutivas do mesmo role
+          if (role === lastRole) continue
           history.push({ role, content: m.content })
           lastRole = role
         }
 
-        // Histórico deve começar com 'user'
         const safeHistory = history[0]?.role === 'user' ? history : history.slice(1)
 
         const res = await fetch('/api/chat', {
@@ -138,7 +138,7 @@ export default function ChatBot() {
           return
         }
 
-        // Stream started — esconde o indicador de "digitando" e abre a bolha da resposta
+        // Stream iniciado — esconde indicador de digitando e abre bolha da resposta
         setLoading(false)
         setMessages(prev => [...prev, { role: 'assistant', content: '' }])
 
@@ -149,7 +149,6 @@ export default function ChatBot() {
           const { done, value } = await reader.read()
           if (done) break
           const chunk = decoder.decode(value, { stream: true })
-          // Acumula o texto no último balão do assistente
           setMessages(prev => {
             const copy = [...prev]
             const last = copy[copy.length - 1]
@@ -163,11 +162,11 @@ export default function ChatBot() {
         push('assistant', 'Desculpe, ocorreu um erro. Tente novamente.')
       } finally {
         setLoading(false)
+        inputRef.current?.focus()
       }
     }
   }
 
-  // 5. Disparar e-mail + abrir WhatsApp ao confirmar encaminhamento
   const handleYes = () => {
     const waMsg = encodeURIComponent(
       `Olá Inamar! Um cliente chegou pelo site da IV Soluções.\n\n📋 *Informações do cliente:*\n${userInfo}\n\nEle está aguardando atendimento.`
@@ -180,15 +179,14 @@ export default function ChatBot() {
         user_info: userInfo,
         time: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
       })
-      .catch(() => {}) // falha silenciosa — não impacta o usuário
+      .catch(() => {})
   }
 
-  // 6. Mensagem de transição marcada como uiOnly — não entra no histórico do Gemini
   const handleNo = () => {
     push(
       'assistant',
       'Sem problemas! 😊 Estou aqui para tirar todas as suas dúvidas sobre a IV Soluções em IA. O que você gostaria de saber?',
-      true // uiOnly
+      true // uiOnly — não entra no histórico do Gemini
     )
     setStep('chat')
   }
@@ -209,6 +207,7 @@ export default function ChatBot() {
 
   return (
     <>
+      {/* Botão flutuante de abrir/fechar */}
       <button
         onClick={() => setOpen(o => !o)}
         aria-label="Abrir chat com IVY"
@@ -236,6 +235,7 @@ export default function ChatBot() {
         </AnimatePresence>
       </button>
 
+      {/* Painel do chat */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -243,113 +243,161 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
-            style={{
-              background: '#111',
-              border: '1px solid #222',
-              maxHeight: '540px',
-            }}
+            className="fixed bottom-24 right-6 z-50"
           >
-            <div
-              className="flex items-center justify-between px-4 py-3"
-              style={{ background: 'var(--laranja)' }}
-            >
-              <div>
-                <p className="font-bold text-white text-sm leading-tight">
-                  IVY · Gênio da IV Soluções
-                </p>
-                <p className="text-xs text-orange-100">Online agora</p>
-              </div>
-              <button
-                onClick={reset}
-                className="text-white opacity-60 hover:opacity-100 text-xs underline transition-opacity"
-              >
-                Reiniciar
-              </button>
-            </div>
+            {/*
+              Wrapper relativo: mantém o gênio fora do overflow-hidden do painel,
+              mas posicionado em relação a ele.
+            */}
+            <div className="relative w-80 sm:w-96">
 
-            <div
-              className="flex-1 overflow-y-auto p-4 space-y-3"
-              style={{ minHeight: 300 }}
-            >
-              {messages.map((msg, i) => (
-                <div
-                  key={i}
-                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              {/* Gênio — visível apenas em sm+ para não sobrepor em mobile */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+                transition={{ duration: 0.4 }}
+                className="absolute -left-32 bottom-8 z-50 hidden sm:block"
+                aria-hidden="true"
+              >
+                <motion.div
+                  animate={{
+                    y: [0, -12, 0],
+                    rotate: [-3, 3, -3],
+                    opacity: [0.85, 1, 0.85],
+                  }}
+                  transition={{
+                    y:       { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                    rotate:  { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                    opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+                  }}
                 >
-                  <div
-                    className="max-w-[82%] rounded-2xl px-4 py-2 text-sm leading-relaxed"
-                    style={{
-                      background: msg.role === 'user' ? 'var(--laranja)' : '#1e1e1e',
-                      color: '#f5f5f5',
-                    }}
-                    dangerouslySetInnerHTML={{ __html: fmt(msg.content) }}
+                  <Lottie
+                    animationData={animationData}
+                    loop={true}
+                    style={{ width: 120, height: 120 }}
                   />
-                </div>
-              ))}
+                </motion.div>
+              </motion.div>
 
-              {loading && (
-                <div className="flex justify-start">
-                  <div
-                    className="rounded-2xl px-4 py-2 text-sm italic"
-                    style={{ background: '#1e1e1e', color: '#8a8a8a' }}
-                  >
-                    IVY está digitando...
-                  </div>
-                </div>
-              )}
-
-              {step === 'forwarding' && !loading && (
-                <div className="flex gap-2 pt-1">
-                  <button
-                    onClick={handleYes}
-                    className="flex-1 py-2 rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-80"
-                    style={{ background: 'var(--laranja)' }}
-                  >
-                    ✅ Sim, encaminhar
-                  </button>
-                  <button
-                    onClick={handleNo}
-                    className="flex-1 py-2 rounded-full text-sm font-semibold transition-opacity hover:opacity-80"
-                    style={{ background: '#2a2a2a', color: '#f5f5f5' }}
-                  >
-                    ❌ Não, obrigado
-                  </button>
-                </div>
-              )}
-
-              <div ref={bottomRef} />
-            </div>
-
-            {step !== 'forwarding' && (
+              {/* Painel do chat */}
               <div
-                className="flex items-center gap-2 px-3 py-3"
-                style={{ borderTop: '1px solid #222' }}
+                className="w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+                style={{
+                  background: '#111',
+                  border: '1px solid #222',
+                  maxHeight: '540px',
+                }}
               >
-                <input
-                  type="text"
-                  value={input}
-                  onChange={e => setInput(e.target.value)}
-                  onKeyDown={handleKey}
-                  placeholder={
-                    step === 'chat'
-                      ? 'Tire sua dúvida sobre a IV Soluções...'
-                      : 'Nome · contato · empresa (se houver)'
-                  }
-                  disabled={loading}
-                  className="flex-1 bg-transparent text-sm outline-none placeholder:text-[#555]"
-                  style={{ color: '#f5f5f5' }}
-                />
-                <button
-                  onClick={handleSend}
-                  disabled={loading || !input.trim()}
-                  className="w-8 h-8 rounded-full flex items-center justify-center disabled:opacity-30 transition-opacity"
+                {/* Header */}
+                <div
+                  className="flex items-center justify-between px-4 py-3"
                   style={{ background: 'var(--laranja)' }}
                 >
-                  <Send size={14} color="#fff" />
-                </button>
+                  <div>
+                    <p className="font-bold text-white text-sm leading-tight">
+                      IVY · Gênio da IV Soluções
+                    </p>
+                    <p className="text-xs text-orange-100">Online agora</p>
+                  </div>
+                  <button
+                    onClick={reset}
+                    className="text-white opacity-60 hover:opacity-100 text-xs underline transition-opacity"
+                  >
+                    Reiniciar
+                  </button>
+                </div>
+
+                {/* Mensagens */}
+                <div
+                  className="flex-1 overflow-y-auto p-4 space-y-3"
+                  style={{ minHeight: 300 }}
+                >
+                  {messages.map((msg, i) => (
+                    <div
+                      key={i}
+                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className="max-w-[82%] rounded-2xl px-4 py-2 text-sm leading-relaxed"
+                        style={{
+                          background: msg.role === 'user' ? 'var(--laranja)' : '#1e1e1e',
+                          color: '#f5f5f5',
+                        }}
+                        dangerouslySetInnerHTML={{ __html: fmt(msg.content) }}
+                      />
+                    </div>
+                  ))}
+
+                  {loading && (
+                    <div className="flex justify-start">
+                      <div
+                        className="rounded-2xl px-4 py-2 text-sm italic"
+                        style={{ background: '#1e1e1e', color: '#8a8a8a' }}
+                      >
+                        IVY está digitando...
+                      </div>
+                    </div>
+                  )}
+
+                  {step === 'forwarding' && !loading && (
+                    <div className="flex gap-2 pt-1">
+                      <button
+                        onClick={handleYes}
+                        className="flex-1 py-2 rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-80"
+                        style={{ background: 'var(--laranja)' }}
+                      >
+                        ✅ Sim, encaminhar
+                      </button>
+                      <button
+                        onClick={handleNo}
+                        className="flex-1 py-2 rounded-full text-sm font-semibold transition-opacity hover:opacity-80"
+                        style={{ background: '#2a2a2a', color: '#f5f5f5' }}
+                      >
+                        ❌ Não, obrigado
+                      </button>
+                    </div>
+                  )}
+
+                  <div ref={bottomRef} />
+                </div>
+
+                {/* Input */}
+                {step !== 'forwarding' && (
+                  <div
+                    className="flex items-center gap-2 px-3 py-3"
+                    style={{ borderTop: '1px solid #222' }}
+                  >
+                    <input
+                      ref={inputRef}
+                      autoFocus
+                      type="text"
+                      value={input}
+                      onChange={e => setInput(e.target.value)}
+                      onKeyDown={handleKey}
+                      placeholder={
+                        step === 'chat'
+                          ? 'Tire sua dúvida sobre a IV Soluções...'
+                          : 'Nome · contato · empresa (se houver)'
+                      }
+                      disabled={loading}
+                      className="flex-1 bg-transparent text-sm outline-none placeholder:text-[#555]"
+                      style={{ color: '#f5f5f5' }}
+                    />
+                    <button
+                      onClick={handleSend}
+                      disabled={loading || !input.trim()}
+                      className="w-8 h-8 rounded-full flex items-center justify-center disabled:opacity-30 transition-opacity"
+                      style={{ background: 'var(--laranja)' }}
+                    >
+                      <Send size={14} color="#fff" />
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
+              {/* fim painel */}
+            </div>
+            {/* fim wrapper relativo */}
           </motion.div>
         )}
       </AnimatePresence>
