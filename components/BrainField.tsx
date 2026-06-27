@@ -511,25 +511,30 @@ function MorphPontos({
 }
 
 export function BrainField({ progressRef: externalProgress }: { progressRef?: RefObject<number> } = {}) {
-  const [isMobile, setIsMobile] = useState(false);
-  const [reduce, setReduce] = useState(false);
+  // init correto já na 1ª render (componente é dynamic ssr:false → window existe)
+  const mqStr = "(max-width: 768px), (pointer: coarse)";
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(mqStr).matches,
+  );
+  const [reduce] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const internalProgress = useRef(0);
   const progressRef = externalProgress ?? internalProgress;
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px), (pointer: coarse)");
-    const rq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setIsMobile(mq.matches);
-    setReduce(rq.matches);
+    const mq = window.matchMedia(mqStr);
     const on = () => setIsMobile(mq.matches);
     mq.addEventListener("change", on);
     return () => mq.removeEventListener("change", on);
   }, []);
 
-  // MESMA qualidade no mobile e no PC: densidade, tamanho e resolução iguais.
-  const count = 40000;
-  const pointSize = 10;
-  const dpr: [number, number] = [1, 1.5];
+  // Performance: no mobile reduz densidade e resolução (LCP/INP/bateria); cheio no PC.
+  const count = isMobile ? 16000 : 40000;
+  const pointSize = isMobile ? 13 : 10;
+  const dpr: [number, number] = isMobile ? [1, 1] : [1, 1.5];
 
   return (
     <div className="absolute inset-0" aria-hidden="true">

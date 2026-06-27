@@ -117,9 +117,9 @@ export const dict = {
           tags: ["IA", "Busca inteligente", "Multi-cliente"],
         },
         {
-          name: "SIEM — Excelência Médica",
+          name: "Plataforma de Excelência Médica",
           category: "Sistema de indicadores",
-          desc: "Sistema Integrado de Excelência Médica para a Rede Paulo de Tarso: painel do corpo clínico com Índice de Excelência Médica de 0 a 100 e acompanhamento de indicadores em tempo real por perfil.",
+          desc: "Painel de indicadores do corpo clínico para o setor de saúde: Índice de Excelência de 0 a 100 e acompanhamento de indicadores em tempo real, com acesso por perfil.",
           tags: ["Indicadores", "Saúde", "Tempo real"],
         },
       ],
@@ -290,9 +290,9 @@ export const dict = {
           tags: ["AI", "Smart search", "Multi-client"],
         },
         {
-          name: "SIEM — Medical Excellence",
+          name: "Medical Excellence Platform",
           category: "Indicators system",
-          desc: "Integrated Medical Excellence System for Rede Paulo de Tarso: a clinical staff panel with a Medical Excellence Index from 0 to 100 and real-time, role-based indicator tracking.",
+          desc: "A clinical-staff indicators panel for the healthcare sector: an Excellence Index from 0 to 100 with real-time, role-based tracking.",
           tags: ["Indicators", "Healthcare", "Real-time"],
         },
       ],

@@ -43,11 +43,11 @@ CAPACIDADE GERAL: A IV Soluções desenvolve QUALQUER solução de tecnologia so
 PROJETOS JÁ ENTREGUES:
 - Onmnia (Controle de Empenhos): sistema de gestão e análise de empenhos, do pedido à entrega, com dashboard em tempo real, validação de terceirizados e acesso por perfil seguro e auditável.
 - Onmnia (Auditor Gênio): assistente de IA que explora catálogos e produtos e responde perguntas, exportando resultados em PDF e documento.
-- SIEM (Excelência Médica) para a Rede Paulo de Tarso: painel de indicadores do corpo clínico, com Índice de Excelência Médica de 0 a 100 e acompanhamento em tempo real.
+- Plataforma de Excelência Médica (setor saúde): painel de indicadores do corpo clínico, com Índice de Excelência de 0 a 100 e acompanhamento em tempo real, com acesso por perfil.
 
 CONTATO:
 - WhatsApp: (31) 99671-5639 — canal principal.
-- E-mails: victor-bh15@hotmail.com e inamarjr@hotmail.com
+- E-mail: contato@ivsolucoes.com.br
 - Atendimento: todos os dias, das 07h às 22h.
 - Ainda não há endereço físico nem redes sociais.
 

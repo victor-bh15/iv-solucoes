@@ -49,12 +49,14 @@ export const metadata: Metadata = {
     description:
       "Inteligências artificiais, sistemas e sites sob medida para o seu negócio.",
     url: site.url,
+    images: [{ url: "/logo.png", alt: "IV Soluções" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "IV Soluções — IA, Sistemas e Sites sob medida",
     description:
       "Inteligências artificiais, sistemas e sites sob medida para o seu negócio.",
+    images: ["/logo.png"],
   },
   robots: { index: true, follow: true },
 };
@@ -80,7 +82,8 @@ const bootScript = `
     el.classList.add('dark'); // o site inicia SEMPRE no escuro
     var lang = localStorage.getItem('iv-lang');
     if (lang === 'en') el.lang = 'en';
-    el.classList.add('iv-splash-active');
+    // Abertura toca só 1x por visita (sessão). Em reloads/navegação seguintes, pula.
+    if (!sessionStorage.getItem('iv-splash-seen')) el.classList.add('iv-splash-active');
   } catch (e) {}
 })();
 `;

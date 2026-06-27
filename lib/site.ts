@@ -5,7 +5,7 @@ export const site = {
   // WhatsApp em formato internacional, só dígitos (Brasil = 55 + DDD + número)
   whatsapp: "5531996715639",
   whatsappDisplay: "(31) 99671-5639",
-  emails: ["victor-bh15@hotmail.com", "inamarjr@hotmail.com"],
+  emails: ["contato@ivsolucoes.com.br"],
   founders: ["Victor Guilherme", "Inamar Miranda"],
   hours: "07:00 – 22:00",
   // URL pública (domínio próprio)

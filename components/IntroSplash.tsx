@@ -34,6 +34,14 @@ export function IntroSplash() {
   // Contador 0 → 100 + fechamento
   useEffect(() => {
     const root = document.documentElement;
+
+    // Abertura só toca 1x por visita: se já foi vista nesta sessão (classe não
+    // ligada pelo boot script), não monta nada e libera o site na hora.
+    if (!root.classList.contains("iv-splash-active")) {
+      setMounted(false);
+      return;
+    }
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let removeTimer: number | undefined;
@@ -44,6 +52,7 @@ export function IntroSplash() {
       setDone(true);
       setProgress(100);
       dispersingRef.current = true; // manda as luzes dispersarem
+      try { sessionStorage.setItem("iv-splash-seen", "1"); } catch {}
       root.classList.add("iv-splash-done");
       removeTimer = window.setTimeout(
         () => {
@@ -65,7 +74,7 @@ export function IntroSplash() {
       };
     }
 
-    const total = 4500; // 0→100 durante o espalhado (3s) + a junção (1,5s)
+    const total = 2600; // 0→100 (forma a marca) — enxuto, sem prender o usuário
     const start = performance.now();
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / total);
@@ -74,8 +83,8 @@ export function IntroSplash() {
       if (p < 1) {
         raf = requestAnimationFrame(tick);
       } else {
-        // segura a marca formada bem mais tempo na tela antes de revelar o site
-        window.setTimeout(close, 3800);
+        // segura a marca formada por um instante e revela o site
+        window.setTimeout(close, 700);
       }
     };
     raf = requestAnimationFrame(tick);
