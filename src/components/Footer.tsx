@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { MessageCircle, Mail, ArrowUp } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import CloudBackground from './CloudBackground';
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -25,8 +24,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-bg-soft border-t border-[var(--color-border)] pt-16 pb-24 sm:pb-8 px-5">
-      <CloudBackground variant="desert" />
+    <footer className="relative border-t border-[var(--color-border)] pt-16 pb-24 sm:pb-8 px-5">
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Marca */}
@@ -115,16 +113,13 @@ export default function Footer() {
 
         <div className="border-t border-[var(--color-border)] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-faint text-sm">{t('footer_rights')}</p>
-          <div className="flex items-center gap-5">
-            <p className="text-faint text-sm">{t('footer_made')}</p>
-            <a
-              href="#"
-              className="text-faint hover:text-[var(--color-accent)] transition-colors flex items-center gap-1 text-sm"
-              aria-label={t('footer_top')}
-            >
-              {t('footer_top')} <ArrowUp size={14} aria-hidden="true" />
-            </a>
-          </div>
+          <a
+            href="#"
+            className="text-faint hover:text-[var(--color-accent)] transition-colors flex items-center gap-1 text-sm"
+            aria-label={t('footer_top')}
+          >
+            {t('footer_top')} <ArrowUp size={14} aria-hidden="true" />
+          </a>
         </div>
       </div>
     </footer>
