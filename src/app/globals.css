@@ -2,7 +2,7 @@
 
 /* ============================================================
    IV Soluções — Design System (refatoração 27/06/2026)
-   Acento único: violeta. Fundo: nuvem densa procedural.
+   Acento único: AZUL ESCURO. Fundo: nuvem densa procedural.
    Doutrina anti-slop: 1 acento, grade 4/8pt, numerais tabulares.
    ============================================================ */
 
@@ -10,30 +10,33 @@
   --font-display: 'Syne', sans-serif;
   --font-sans: 'DM Sans', sans-serif;
 
-  /* Acento único — violeta */
-  --color-accent: #7C6CFF;
-  --color-accent-hover: #9586FF;
-  --color-accent-soft: #1A1733;
+  /* Acento único — azul escuro */
+  --color-accent: #2E55D4;
+  --color-accent-hover: #4B74F2;
+  --color-accent-soft: #111A33;
 
   /* Superfícies */
-  --color-bg: #08070F;
-  --color-bg-soft: #0C0B16;
-  --color-card: #110F1E;
-  --color-border: #211E36;
-  --color-border-soft: #1A1828;
+  --color-bg: #060912;
+  --color-bg-soft: #0A0E1B;
+  --color-card: #0E1424;
+  --color-border: #1B2238;
+  --color-border-soft: #161C2E;
 
   /* Texto */
-  --color-ink: #F4F3FA;
-  --color-muted: #9C99B5;
-  --color-faint: #5C5973;
+  --color-ink: #F2F4FA;
+  --color-muted: #98A0B8;
+  --color-faint: #5A6178;
+
+  /* Areia (efeito deserto, parte final) */
+  --color-sand: #C9A36B;
 }
 
 :root {
   /* alias legado mantido p/ componentes que ainda referenciam --laranja
-     (ChatBot) — agora aponta para o violeta. */
-  --laranja: #7C6CFF;
-  --accent: #7C6CFF;
-  --accent-hover: #9586FF;
+     (ChatBot) — agora aponta para o azul. */
+  --laranja: #2E55D4;
+  --accent: #2E55D4;
+  --accent-hover: #4B74F2;
 }
 
 * {
@@ -53,7 +56,7 @@ body {
 }
 
 ::selection {
-  background: rgba(124, 108, 255, 0.3);
+  background: rgba(46, 85, 212, 0.35);
   color: #fff;
 }
 
@@ -61,68 +64,83 @@ body {
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb {
-  background: #26233B;
+  background: #222a44;
   border-radius: 8px;
   border: 2px solid var(--color-bg);
 }
-::-webkit-scrollbar-thumb:hover { background: #322E4D; }
+::-webkit-scrollbar-thumb:hover { background: #2c365a; }
 
 /* ---------- Tipografia utilitária ---------- */
 .font-display { font-family: var(--font-display); }
 
 /* Texto com gradiente de acento (uso pontual em destaque) */
 .text-gradient {
-  background: linear-gradient(120deg, #C9C2FF 0%, #7C6CFF 55%, #5B4AE0 100%);
+  background: linear-gradient(120deg, #BCD0FF 0%, #4B74F2 50%, #2E55D4 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* ---------- Nuvem densa procedural ---------- */
+/* ---------- Nuvem densa procedural — movimento AMPLO ---------- */
 .cloud-drift {
-  animation: cloudDrift 38s ease-in-out infinite alternate;
+  animation: cloudDrift 22s ease-in-out infinite alternate;
   will-change: transform;
 }
 .cloud-drift-slow {
-  animation: cloudDrift2 52s ease-in-out infinite alternate;
+  animation: cloudDrift2 30s ease-in-out infinite alternate;
   will-change: transform;
 }
 
 @keyframes cloudDrift {
-  0%   { transform: translate3d(-3%, 0, 0) scale(1.15); }
-  100% { transform: translate3d(4%, -2%, 0) scale(1.28); }
+  0%   { transform: translate3d(-8%, -2%, 0) scale(1.2)  rotate(-1deg); }
+  50%  { transform: translate3d(6%, 3%, 0)   scale(1.35) rotate(1deg); }
+  100% { transform: translate3d(10%, -4%, 0) scale(1.28) rotate(0deg); }
 }
 @keyframes cloudDrift2 {
-  0%   { transform: translate3d(3%, 1%, 0) scale(1.2); }
-  100% { transform: translate3d(-4%, -1%, 0) scale(1.32); }
+  0%   { transform: translate3d(8%, 2%, 0)   scale(1.25); }
+  50%  { transform: translate3d(-7%, -3%, 0) scale(1.4); }
+  100% { transform: translate3d(-10%, 4%, 0) scale(1.3); }
 }
 
-/* Brilho pulsante atrás de elementos-chave */
+/* ---------- Nuvem de areia (deserto) — varre na horizontal ---------- */
+.sand-blow {
+  animation: sandBlow 18s linear infinite alternate;
+  will-change: transform;
+}
+.sand-blow-2 {
+  animation: sandBlow 26s linear infinite alternate-reverse;
+  will-change: transform;
+}
+@keyframes sandBlow {
+  0%   { transform: translate3d(-12%, 4%, 0) scale(1.3); }
+  100% { transform: translate3d(14%, -3%, 0) scale(1.45); }
+}
+
+/* ---------- Brilho pulsante (Nossa Missão) — bem mais vivo ---------- */
 @keyframes auraPulse {
-  0%, 100% { opacity: 0.35; transform: scale(1); }
-  50%      { opacity: 0.6;  transform: scale(1.12); }
+  0%, 100% { opacity: 0.25; transform: scale(0.92); }
+  50%      { opacity: 0.85; transform: scale(1.25); }
 }
-.aura {
-  animation: auraPulse 6s ease-in-out infinite;
-}
+.aura { animation: auraPulse 6s ease-in-out infinite; }
+.aura-strong { animation: auraPulse 3.4s ease-in-out infinite; }
 
-/* Reveal padrão (fallback CSS p/ no-JS já tratado pelo framer) */
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
+  50%      { transform: translateY(-10px); }
 }
 .float-y { animation: floatY 5s ease-in-out infinite; }
 
 /* Linha-grade sutil para seções técnicas */
 .grid-fade {
   background-image:
-    linear-gradient(to right, rgba(124,108,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(124,108,255,0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(46,85,212,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46,85,212,0.06) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cloud-drift, .cloud-drift-slow, .aura, .float-y { animation: none; }
+  .cloud-drift, .cloud-drift-slow, .sand-blow, .sand-blow-2,
+  .aura, .aura-strong, .float-y { animation: none; }
   html { scroll-behavior: auto; }
 }

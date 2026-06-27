@@ -72,13 +72,21 @@ const translations: Record<Lang, Record<string, string>> = {
     step4_desc: 'Implantamos, monitoramos e acompanhamos os resultados de perto.',
 
     portfolio_title: 'O que já construímos',
-    portfolio_subtitle: 'Produtos e plataformas que tiram empresas do trabalho manual',
-    portfolio_btn: 'Saber mais',
+    portfolio_subtitle: 'Clique em um projeto para ver o que ele faz',
+    portfolio_btn: 'Ver projeto',
+
+    modal_about: 'Sobre o projeto',
+    modal_features: 'O que ele faz',
+    modal_stack: 'Tecnologias',
+    modal_cta: 'Quero algo assim',
+    modal_close: 'Fechar',
+    modal_preview: 'Amostra do projeto',
 
     manifesto_label: 'Nossa Missão',
     manifesto_quote:
       'Acreditamos que a inteligência artificial deve ser acessível, ética e transformadora — uma ferramenta a serviço de pessoas e negócios reais.',
     manifesto_signature: 'Inamar Miranda & Victor Andrade',
+    manifesto_founders: 'Fundadores, IV Soluções em IA',
 
     contact_title: 'Vamos conversar',
     contact_subtitle: 'Pronto para transformar seu negócio com IA?',
@@ -97,6 +105,9 @@ const translations: Record<Lang, Record<string, string>> = {
 
     footer_rights: '© 2026 IV Soluções em IA. Todos os direitos reservados.',
     footer_tagline: 'A melhor maneira de pensar, interagir e agir.',
+    footer_nav: 'Navegação',
+    footer_made: 'Feito com ♥ por Inamar & Victor',
+    footer_top: 'Topo',
 
     chat_title: 'IVY · Gênio da IV',
     chat_subtitle: 'Assistente da IV Soluções',
@@ -167,13 +178,21 @@ const translations: Record<Lang, Record<string, string>> = {
     step4_desc: 'We deploy, monitor and follow the results closely.',
 
     portfolio_title: 'What we have built',
-    portfolio_subtitle: 'Products and platforms that move companies out of manual work',
-    portfolio_btn: 'Learn more',
+    portfolio_subtitle: 'Click a project to see what it does',
+    portfolio_btn: 'View project',
+
+    modal_about: 'About the project',
+    modal_features: 'What it does',
+    modal_stack: 'Tech stack',
+    modal_cta: 'I want something like this',
+    modal_close: 'Close',
+    modal_preview: 'Project preview',
 
     manifesto_label: 'Our Mission',
     manifesto_quote:
       'We believe artificial intelligence should be accessible, ethical and transformative — a tool at the service of real people and businesses.',
     manifesto_signature: 'Inamar Miranda & Victor Andrade',
+    manifesto_founders: 'Founders, IV Soluções em IA',
 
     contact_title: "Let's talk",
     contact_subtitle: 'Ready to transform your business with AI?',
@@ -192,6 +211,9 @@ const translations: Record<Lang, Record<string, string>> = {
 
     footer_rights: '© 2026 IV Soluções em IA. All rights reserved.',
     footer_tagline: 'The best way to think, interact, and act.',
+    footer_nav: 'Navigation',
+    footer_made: 'Made with ♥ by Inamar & Victor',
+    footer_top: 'Top',
 
     chat_title: 'IVY · IV Genius',
     chat_subtitle: 'IV Soluções Assistant',

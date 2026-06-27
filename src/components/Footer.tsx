@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { MessageCircle, Mail, ArrowUp } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import CloudBackground from './CloudBackground';
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -24,21 +25,22 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-bg-soft border-t border-[var(--color-border)] pt-16 pb-8 px-5">
-      <div className="max-w-7xl mx-auto">
+    <footer className="relative overflow-hidden bg-bg-soft border-t border-[var(--color-border)] pt-16 pb-8 px-5">
+      <CloudBackground variant="desert" />
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Marca */}
           <div className="lg:col-span-1">
-            <a href="#" className="flex items-center gap-2.5 mb-4" aria-label="IV Soluções — Início">
+            <a href="#" className="flex items-center gap-2 mb-4" aria-label="iV Soluções — Início">
               <Image
                 src="/logo-iv-white.png"
-                alt="IV Soluções em IA"
-                width={36}
-                height={36}
-                className="object-contain h-8 w-8"
+                alt="iV Soluções em IA"
+                width={28}
+                height={28}
+                className="object-contain h-7 w-7"
               />
-              <span className="font-display font-bold text-ink text-lg tracking-tight">
-                IV <span className="text-muted font-medium">Soluções</span>
+              <span className="font-display font-semibold text-ink text-lg tracking-tight">
+                Soluções
               </span>
             </a>
             <p className="text-muted text-sm leading-relaxed mb-5 max-w-[240px]">
@@ -46,7 +48,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="https://wa.me/5531984496889"
+                href="https://wa.me/5531996715639"
                 target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
                 className="w-9 h-9 bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] rounded-lg flex items-center justify-center text-muted transition-all"
               >
@@ -64,7 +66,7 @@ export default function Footer() {
           {/* Navegação */}
           <div>
             <h3 className="font-display text-ink font-semibold text-sm mb-5 uppercase tracking-wider">
-              Navegação
+              {t('footer_nav')}
             </h3>
             <ul className="flex flex-col gap-3" role="list">
               {navLinks.map((link) => (
@@ -100,7 +102,7 @@ export default function Footer() {
             </h3>
             <p className="text-muted text-sm mb-4 leading-relaxed">{t('contact_subtitle')}</p>
             <a
-              href="https://wa.me/5531984496889"
+              href="https://wa.me/5531996715639"
               target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
               aria-label={t('contact_whatsapp')}
@@ -114,15 +116,13 @@ export default function Footer() {
         <div className="border-t border-[var(--color-border)] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-faint text-sm">{t('footer_rights')}</p>
           <div className="flex items-center gap-5">
-            <p className="text-faint text-sm">
-              Feito com <span className="text-[var(--color-accent)]">♥</span> por Inamar &amp; Victor
-            </p>
+            <p className="text-faint text-sm">{t('footer_made')}</p>
             <a
               href="#"
               className="text-faint hover:text-[var(--color-accent)] transition-colors flex items-center gap-1 text-sm"
-              aria-label="Voltar ao topo"
+              aria-label={t('footer_top')}
             >
-              Topo <ArrowUp size={14} aria-hidden="true" />
+              {t('footer_top')} <ArrowUp size={14} aria-hidden="true" />
             </a>
           </div>
         </div>

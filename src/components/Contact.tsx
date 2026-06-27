@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { MessageCircle, Send, Mail, Phone } from 'lucide-react';
+import { MessageCircle, Send, Mail } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function Contact() {
@@ -17,7 +17,7 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Olá! Sou ${name}.\n\n${message}\n\nE-mail para retorno: ${email}`;
-    const url = `https://wa.me/5531984496889?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/5531996715639?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
@@ -25,9 +25,8 @@ export default function Contact() {
     'w-full bg-bg border border-[var(--color-border)] focus:border-[var(--color-accent)] rounded-xl px-4 py-3 text-sm text-ink placeholder-[var(--color-faint)] outline-none transition-colors focus:ring-2 focus:ring-[var(--color-accent)]/20';
 
   const channels = [
-    { icon: MessageCircle, label: 'WhatsApp', value: '+55 31 98449-6889', href: 'https://wa.me/5531984496889', ext: true },
+    { icon: MessageCircle, label: 'WhatsApp', value: '+55 31 99671-5639', href: 'https://wa.me/5531996715639', ext: true },
     { icon: Mail, label: 'E-mail', value: 'contato@ivsolucoesia.com.br', href: 'mailto:contato@ivsolucoesia.com.br', ext: false },
-    { icon: Phone, label: t('contact_phone'), value: '+55 31 98449-6889', href: 'tel:+5531984496889', ext: false },
   ];
 
   return (
@@ -137,7 +136,7 @@ export default function Contact() {
                 </button>
                 <span className="text-faint text-sm text-center px-1">{t('contact_or')}</span>
                 <a
-                  href="https://wa.me/5531984496889"
+                  href="https://wa.me/5531996715639"
                   target="_blank" rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 border border-[var(--color-border)] text-ink hover:border-[var(--color-accent)]/60 hover:bg-white/[0.03] font-medium py-3 rounded-xl transition-all"
                   aria-label={t('contact_whatsapp')}

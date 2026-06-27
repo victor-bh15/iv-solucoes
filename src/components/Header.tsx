@@ -34,17 +34,17 @@ export default function Header() {
     >
       <nav className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between h-[72px]">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 group" aria-label="IV Soluções em IA — Início">
+        <a href="#" className="flex items-center gap-2 group" aria-label="iV Soluções em IA — Início">
           <Image
             src="/logo-iv-white.png"
-            alt="IV Soluções em IA"
-            width={40}
-            height={40}
+            alt="iV Soluções em IA"
+            width={28}
+            height={28}
             priority
-            className="object-contain h-9 w-9 transition-transform duration-300 group-hover:scale-105"
+            className="object-contain h-7 w-7 transition-transform duration-300 group-hover:scale-105"
           />
-          <span className="font-display font-bold text-ink text-lg tracking-tight">
-            IV <span className="text-muted font-medium">Soluções</span>
+          <span className="font-display font-semibold text-ink text-lg tracking-tight">
+            Soluções
           </span>
         </a>
 

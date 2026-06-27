@@ -84,7 +84,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.26, ease }}
           >
             <a
-              href="https://wa.me/5531984496889"
+              href="https://wa.me/5531996715639"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white px-7 py-3.5 rounded-xl text-base font-semibold transition-all duration-300 shadow-lg shadow-[var(--color-accent)]/30"

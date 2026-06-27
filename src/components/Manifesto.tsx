@@ -13,7 +13,8 @@ export default function Manifesto() {
   return (
     <section className="relative py-32 px-5 bg-bg overflow-hidden" ref={ref} aria-label="Manifesto">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[340px] bg-[var(--color-accent)] rounded-full opacity-[0.08] blur-[120px] aura" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[380px] bg-[var(--color-accent)] rounded-full opacity-25 blur-[120px] aura-strong" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[220px] bg-[var(--color-accent-hover)] rounded-full opacity-20 blur-[90px] aura-strong" style={{ animationDelay: '1.2s' }} />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -47,7 +48,7 @@ export default function Manifesto() {
         >
           <div className="w-16 h-px bg-[var(--color-accent)]/40" aria-hidden="true" />
           <p className="text-ink text-base font-medium">{t('manifesto_signature')}</p>
-          <p className="text-[var(--color-accent)]/80 text-sm">Fundadores, IV Soluções em IA</p>
+          <p className="text-[var(--color-accent)]/80 text-sm">{t('manifesto_founders')}</p>
         </motion.div>
       </div>
     </section>

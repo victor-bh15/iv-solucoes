@@ -10,6 +10,7 @@ import Contact from '@/components/Contact';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import ChatBot from '@/components/ChatBot';
+import WhatsAppFab from '@/components/WhatsAppFab';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <FAQ />
       </main>
       <Footer />
+      <WhatsAppFab />
       <ChatBot />
     </LanguageProvider>
   );
