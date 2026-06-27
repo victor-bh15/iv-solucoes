@@ -25,7 +25,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-bg-soft border-t border-[var(--color-border)] pt-16 pb-8 px-5">
+    <footer className="relative overflow-hidden bg-bg-soft border-t border-[var(--color-border)] pt-16 pb-24 sm:pb-8 px-5">
       <CloudBackground variant="desert" />
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">

@@ -22,7 +22,7 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="servicos" className="relative py-28 px-5 bg-bg" ref={ref}>
+    <section id="servicos" className="relative py-28 px-5" ref={ref}>
       <div className="absolute inset-0 grid-fade pointer-events-none" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto">
         <motion.div

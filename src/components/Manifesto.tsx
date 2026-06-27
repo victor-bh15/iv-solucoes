@@ -11,7 +11,7 @@ export default function Manifesto() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="relative py-32 px-5 bg-bg overflow-hidden" ref={ref} aria-label="Manifesto">
+    <section className="relative py-32 px-5 overflow-hidden" ref={ref} aria-label="Manifesto">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[380px] bg-[var(--color-accent)] rounded-full opacity-25 blur-[120px] aura-strong" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[220px] bg-[var(--color-accent-hover)] rounded-full opacity-20 blur-[90px] aura-strong" style={{ animationDelay: '1.2s' }} />

@@ -30,7 +30,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contato" className="py-28 px-5 bg-bg" ref={ref}>
+    <section id="contato" className="py-28 px-5" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"

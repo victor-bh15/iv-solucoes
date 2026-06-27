@@ -23,8 +23,7 @@ export default function Portfolio() {
   const [active, setActive] = useState<Project | null>(null);
 
   return (
-    <section id="portfolio" className="relative py-28 px-5 bg-bg-soft" ref={ref}>
-      <CloudLower />
+    <section id="portfolio" className="relative py-28 px-5" ref={ref}>
       <div className="relative max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -82,15 +81,5 @@ export default function Portfolio() {
 
       <ProjectModal project={active} onClose={() => setActive(null)} />
     </section>
-  );
-}
-
-/* Nuvem azul suave aparecendo mais embaixo no site */
-function CloudLower() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      <div className="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[120%] h-[60%] cloud-drift-slow"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(46,85,212,0.18), transparent 70%)' }} />
-    </div>
   );
 }

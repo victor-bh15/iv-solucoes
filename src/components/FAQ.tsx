@@ -5,7 +5,6 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { FAQS } from '@/content';
-import CloudBackground from './CloudBackground';
 
 function FAQItem({ q, a, index, inView }: { q: string; a: string; index: number; inView: boolean }) {
   const [open, setOpen] = useState(false);
@@ -52,8 +51,7 @@ export default function FAQ() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="relative py-28 px-5 bg-bg overflow-hidden" ref={ref}>
-      <CloudBackground variant="desert" />
+    <section className="relative py-28 px-5" ref={ref}>
       <div className="relative max-w-3xl mx-auto">
         <motion.div
           className="text-center mb-14"

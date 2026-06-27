@@ -1,4 +1,5 @@
 import { LanguageProvider } from '@/context/LanguageContext';
+import SiteBackground from '@/components/SiteBackground';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
@@ -15,6 +16,7 @@ import WhatsAppFab from '@/components/WhatsAppFab';
 export default function Home() {
   return (
     <LanguageProvider>
+      <SiteBackground />
       <Header />
       <main>
         <Hero />

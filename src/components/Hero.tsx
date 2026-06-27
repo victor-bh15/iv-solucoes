@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, MessageCircle, Sparkles, Check } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import CloudBackground from './CloudBackground';
 
 const ROTATING: Record<string, string[]> = {
   pt: ['inteligente.', 'eficiente.', 'automatizado.', 'lucrativo.'],
@@ -25,11 +24,9 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen flex items-center overflow-hidden bg-bg pt-28 pb-16"
+      className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-16"
       aria-label="Início"
     >
-      <CloudBackground variant="hero" />
-
       <div className="relative z-10 w-full max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
         {/* Coluna texto */}
         <div className="lg:col-span-7">

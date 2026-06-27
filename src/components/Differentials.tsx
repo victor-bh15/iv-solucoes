@@ -22,7 +22,7 @@ export default function Differentials() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-28 px-5 bg-bg-soft" ref={ref} aria-label={t('diff_title')}>
+    <section className="py-28 px-5" ref={ref} aria-label={t('diff_title')}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
