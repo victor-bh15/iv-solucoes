@@ -23,7 +23,6 @@ export default function Services() {
 
   return (
     <section id="servicos" className="relative py-28 px-5" ref={ref}>
-      <div className="absolute inset-0 grid-fade pointer-events-none" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"

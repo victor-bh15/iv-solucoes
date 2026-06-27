@@ -28,8 +28,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[var(--color-bg)]/80 backdrop-blur-xl border-b border-[var(--color-border)]'
-          : 'bg-transparent border-b border-transparent'
+          ? 'bg-[var(--color-bg)]/85 backdrop-blur-xl border-b border-[var(--color-border)]'
+          : 'bg-gradient-to-b from-[var(--color-bg)] via-[var(--color-bg)]/80 to-transparent border-b border-transparent'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between h-[72px]">
