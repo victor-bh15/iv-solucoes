@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+/* Dark mode acionado por classe .dark (controlado pelo ThemeProvider) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ── Cores da marca IV Soluções (azul navy → azul elétrico) ── */
+  --color-navy-50: #eef2f9;
+  --color-navy-100: #d6e0f0;
+  --color-navy-200: #adc0e0;
+  --color-navy-300: #7e9bcc;
+  --color-navy-400: #4f72ad;
+  --color-navy-500: #2e5089;
+  --color-navy-600: #1f3a6b;
+  --color-navy-700: #16294d;
+  --color-navy-800: #112038;
+  --color-navy-900: #0b1626;
+  --color-navy-950: #070e1a;
+
+  /* ── Acento híbrido azul → violeta (sóbrio, empresarial) ── */
+  --color-electric: #2563eb; /* azul elétrico */
+  --color-iris: #5b6bff; /* azul-violeta */
+  --color-violet: #7c5cff; /* violeta */
+
+  --color-graphite: #3c4043;
+  --color-graphite-light: #5b6168;
+
+  /* Tokens semânticos (preenchidos por :root / .dark abaixo) */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+
+  /* Fontes */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+
+  /* Gradiente assinatura azul→violeta (reusável) */
+  --gradient-brand: linear-gradient(
+    100deg,
+    var(--color-electric) 0%,
+    var(--color-iris) 50%,
+    var(--color-violet) 100%
+  );
+
+  /* Animações */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 8s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Flutuação própria dos orbs do fundo (deriva suave em XY + leve respiração) */
+@keyframes orb-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, -4%) scale(1.05);
+  }
+  66% {
+    transform: translate(-3%, 3%) scale(0.97);
+  }
+}
+.orb-float {
+  animation-name: orb-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+/* ── Tema claro (sóbrio; o "uau" mora no escuro) ── */
+:root {
+  --background: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #f0f2f8;
+  --foreground: #0c1018;
+  --muted: #56607a;
+  --faint: #8a92a6;
+  --border: #e3e7f0;
+  --brand: #4338ca;
+  --brand-strong: #2563eb;
+}
+
+/* ── Tema escuro — base Dala: preto quase-puro, altíssimo contraste ── */
+.dark {
+  --background: #07070a;
+  --surface: #0e0f15;
+  --surface-2: #14161f;
+  --foreground: #f4f5f8;
+  --muted: #9aa0b0;
+  --faint: #5b6172;
+  --border: #1d2030;
+  --brand: #8a93ff; /* azul-violeta claro p/ texto de acento */
+  --brand-strong: #a9b2ff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ── Tipografia de display: gigante, tracking apertado, alinhada à esquerda ── */
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Texto com preenchimento em gradiente azul→violeta */
+.text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Pílula CTA gradiente (reusável) */
+.btn-gradient {
+  position: relative;
+  background-image: var(--gradient-brand);
+  background-size: 200% auto;
+  color: #fff;
+  transition: background-position 0.6s ease, box-shadow 0.3s ease,
+    transform 0.3s ease;
+  box-shadow: 0 8px 30px -8px color-mix(in srgb, var(--color-iris) 70%, transparent);
+}
+.btn-gradient:hover {
+  background-position: right center;
+  box-shadow: 0 12px 40px -8px color-mix(in srgb, var(--color-violet) 75%, transparent);
+}
+
+/* Borda em gradiente (cartões premium) */
+.ring-gradient {
+  position: relative;
+}
+.ring-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, var(--color-iris) 55%, transparent),
+    transparent 45%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Barra de rolagem discreta */
+@supports (scrollbar-color: auto) {
+  html {
+    scrollbar-color: color-mix(in srgb, var(--brand) 45%, transparent)
+      transparent;
+    scrollbar-width: thin;
+  }
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--brand) 40%, transparent);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--brand) 65%, transparent);
+  background-clip: padding-box;
+}
+
+/* Rolagem suave para âncoras internas */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  body {
+    transition: none;
+  }
+}
+
+/* Foco visível para acessibilidade */
+:focus-visible {
+  outline: 2px solid var(--color-iris);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Seleção de texto com a cor da marca */
+::selection {
+  background: color-mix(in srgb, var(--color-iris) 30%, transparent);
+}
+
+/* ── Abertura (preloader) ──────────────────────────────────────────────────
+   O overlay é renderizado no HTML do servidor e fica visível JÁ no primeiro
+   paint (antes de qualquer JS), garantindo que a MARCA apareça na hora — sem
+   flash de conteúdo antes da intro. O React assume depois, anima e fecha. */
+#iv-splash {
+  display: none;
+}
+html.iv-splash-active #iv-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #050507;
+  opacity: 1;
+}
+html.iv-splash-active.iv-splash-done #iv-splash {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+/* Trava o scroll do fundo enquanto a abertura está na tela. */
+html.iv-splash-active,
+html.iv-splash-active body {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.iv-splash-active.iv-splash-done #iv-splash {
+    transition: opacity 0.25s ease;
+  }
+}

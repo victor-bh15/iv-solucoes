@@ -1,0 +1,16 @@
+IMAGENS DOS PROJETOS (PORTFÓLIO)
+================================
+
+Salve aqui os prints reais dos projetos com EXATAMENTE estes nomes:
+
+  1) onmnia-empenhos.png   -> Onmnia (Controle de Empenhos)
+  2) auditor-genio.png     -> Onmnia (Auditor Gênio)
+  3) siem.png              -> SIEM (Excelência Médica)
+
+Assim que os arquivos estiverem aqui com esses nomes, eles aparecem
+automaticamente no site (não precisa mexer em código).
+
+Enquanto o arquivo não existir, o site mostra uma prévia bonita gerada
+por código no lugar — então nada quebra.
+
+Dica: imagens em formato 16:10 (ex.: 1600x1000) ficam perfeitas nos cards.
