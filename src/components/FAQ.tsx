@@ -2,33 +2,33 @@
 
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 const FAQS = [
   {
-    q: 'Quanto tempo leva para desenvolver um chatbot com IA?',
-    a: 'Geralmente entre 2 e 4 semanas, dependendo da complexidade, das integrações necessárias e do volume de treinamento do modelo. Projetos simples podem ser entregues em menos tempo.',
+    q: 'Quanto tempo leva para colocar uma solução de IA no ar?',
+    a: 'Depende do escopo, mas projetos enxutos costumam ir ao ar em poucas semanas. No diagnóstico já te damos um prazo realista — sem promessa que não cabe.',
   },
   {
     q: 'Vocês atendem empresas de qual porte?',
-    a: 'Atendemos desde startups e pequenos negócios até grandes corporações. Temos soluções escaláveis e adaptadas para cada tamanho e segmento de mercado.',
+    a: 'De pequenos negócios a operações maiores. Como tudo é sob medida, adaptamos o escopo (e o investimento) ao tamanho e ao momento da sua empresa.',
   },
   {
     q: 'Quais tecnologias de IA vocês utilizam?',
-    a: 'Trabalhamos com as principais plataformas do mercado: Google Gemini, OpenAI GPT-4, Anthropic Claude, além de modelos open-source como Llama e Mistral, sempre escolhendo a melhor opção para cada caso.',
+    a: 'Trabalhamos principalmente com Google Gemini e DeepSeek, em cross-correção (uma IA revisa a outra para reduzir erros), além de modelos open-source quando fazem sentido. Escolhemos a melhor opção para cada caso — não há um único modelo certo para tudo.',
   },
   {
-    q: 'É possível integrar a IA com meus sistemas existentes?',
-    a: 'Sim! Somos especialistas em integração de APIs e podemos conectar sua solução de IA com CRMs, ERPs, e-commerce, WhatsApp Business, Slack, e praticamente qualquer plataforma com API.',
+    q: 'É possível integrar a IA com os sistemas que já uso?',
+    a: 'Sim. Somos especialistas em integração via API e conectamos sua solução a CRMs, ERPs, planilhas, WhatsApp e praticamente qualquer plataforma com API disponível.',
   },
   {
-    q: 'Como funciona o suporte pós-entrega?',
-    a: 'Oferecemos suporte 24h para questões críticas e manutenção contínua com SLA definido. Acompanhamos métricas de performance e fazemos ajustes proativos conforme o uso cresce.',
+    q: 'Como ficam a privacidade e a LGPD dos meus dados?',
+    a: 'Tratamos privacidade desde o desenho do projeto, não como remendo no fim. Definimos o que é coletado, onde fica e quem acessa — alinhado à LGPD e ao tipo de dado do seu negócio.',
   },
   {
-    q: 'Posso ver cases de sucesso antes de contratar?',
-    a: 'Claro! Agende uma consultoria gratuita e apresentamos cases detalhados do nosso portfólio, incluindo métricas reais de ROI, redução de custos e aumento de produtividade dos projetos.',
+    q: 'E o suporte depois da entrega?',
+    a: 'Não sumimos no lançamento. Acompanhamos, medimos resultados e evoluímos a solução, com suporte humano real e canais diretos com a equipe.',
   },
 ];
 
@@ -44,25 +44,25 @@ function FAQItem({ q, a, index, inView }: FAQItemProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.07 }}
-      className="border border-[#1E1E1E] rounded-xl overflow-hidden hover:border-[#C8741A]/30 transition-colors"
+      transition={{ duration: 0.5, delay: index * 0.06 }}
+      className="border border-[var(--color-border)] rounded-2xl overflow-hidden bg-[var(--color-card)] hover:border-[var(--color-accent)]/40 transition-colors"
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between text-left px-5 py-4 bg-[#111111] hover:bg-[#141414] transition-colors group"
+        className="w-full flex items-center justify-between text-left px-5 py-4 hover:bg-white/[0.02] transition-colors group gap-4"
         aria-expanded={open}
         aria-controls={`faq-answer-${index}`}
       >
-        <span
-          className="text-[#F5F5F5] font-medium text-sm pr-4 group-hover:text-[#C8741A] transition-colors"
-          style={{ fontFamily: 'Syne, sans-serif' }}
-        >
+        <span className="font-display text-ink font-medium text-[15px] group-hover:text-[var(--color-accent)] transition-colors">
           {q}
         </span>
-        <span className="flex-shrink-0 text-[#C8741A]" aria-hidden="true">
-          {open ? <Minus size={16} /> : <Plus size={16} />}
+        <span
+          className={`flex-shrink-0 text-[var(--color-accent)] transition-transform duration-300 ${open ? 'rotate-45' : ''}`}
+          aria-hidden="true"
+        >
+          <Plus size={18} />
         </span>
       </button>
 
@@ -77,9 +77,7 @@ function FAQItem({ q, a, index, inView }: FAQItemProps) {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <p className="px-5 py-4 text-[#8A8A8A] text-sm leading-relaxed bg-[#0E0E0E] border-t border-[#1A1A1A]">
-              {a}
-            </p>
+            <p className="px-5 pb-5 text-muted text-sm leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -93,21 +91,16 @@ export default function FAQ() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-28 px-4 bg-[#0A0A0A]" ref={ref}>
+    <section className="py-28 px-5 bg-bg" ref={ref}>
       <div className="max-w-3xl mx-auto">
         <motion.div
           className="text-center mb-14"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2
-            className="text-4xl md:text-5xl font-bold text-[#F5F5F5] mb-4"
-            style={{ fontFamily: 'Syne, sans-serif' }}
-          >
-            {t('faq_title')}
-          </h2>
-          <p className="text-[#8A8A8A] text-lg">{t('faq_subtitle')}</p>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-ink mb-4">{t('faq_title')}</h2>
+          <p className="text-muted text-lg">{t('faq_subtitle')}</p>
         </motion.div>
 
         <div className="flex flex-col gap-3" role="list">

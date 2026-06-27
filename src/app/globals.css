@@ -1,17 +1,43 @@
 @import "tailwindcss";
 
+/* ============================================================
+   IV Soluções — Design System (refatoração 27/06/2026)
+   Acento único: violeta. Fundo: nuvem densa procedural.
+   Doutrina anti-slop: 1 acento, grade 4/8pt, numerais tabulares.
+   ============================================================ */
+
 @theme {
-  --font-syne: 'Syne', sans-serif;
+  --font-display: 'Syne', sans-serif;
   --font-sans: 'DM Sans', sans-serif;
-  --color-accent: #C8741A;
-  --color-accent-hover: #E8840A;
-  --color-card: #111111;
-  --color-border: #1E1E1E;
-  --color-muted: #8A8A8A;
+
+  /* Acento único — violeta */
+  --color-accent: #7C6CFF;
+  --color-accent-hover: #9586FF;
+  --color-accent-soft: #1A1733;
+
+  /* Superfícies */
+  --color-bg: #08070F;
+  --color-bg-soft: #0C0B16;
+  --color-card: #110F1E;
+  --color-border: #211E36;
+  --color-border-soft: #1A1828;
+
+  /* Texto */
+  --color-ink: #F4F3FA;
+  --color-muted: #9C99B5;
+  --color-faint: #5C5973;
 }
 
 :root {
-  --laranja: #C8741A;
+  /* alias legado mantido p/ componentes que ainda referenciam --laranja
+     (ChatBot) — agora aponta para o violeta. */
+  --laranja: #7C6CFF;
+  --accent: #7C6CFF;
+  --accent-hover: #9586FF;
+}
+
+* {
+  border-color: var(--color-border);
 }
 
 html {
@@ -19,45 +45,84 @@ html {
 }
 
 body {
-  background-color: #0A0A0A;
-  color: #F5F5F5;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "tnum" 1; /* numerais tabulares */
+  overflow-x: hidden; /* trava qualquer overflow horizontal no mobile */
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+::selection {
+  background: rgba(124, 108, 255, 0.3);
+  color: #fff;
 }
 
-@keyframes smoke {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.6); }
+/* Scrollbar sóbria */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: #26233B;
+  border-radius: 8px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #322E4D; }
+
+/* ---------- Tipografia utilitária ---------- */
+.font-display { font-family: var(--font-display); }
+
+/* Texto com gradiente de acento (uso pontual em destaque) */
+.text-gradient {
+  background: linear-gradient(120deg, #C9C2FF 0%, #7C6CFF 55%, #5B4AE0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+/* ---------- Nuvem densa procedural ---------- */
+.cloud-drift {
+  animation: cloudDrift 38s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.cloud-drift-slow {
+  animation: cloudDrift2 52s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
-.logo-float {
-  animation: float 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px #C8741A);
+@keyframes cloudDrift {
+  0%   { transform: translate3d(-3%, 0, 0) scale(1.15); }
+  100% { transform: translate3d(4%, -2%, 0) scale(1.28); }
+}
+@keyframes cloudDrift2 {
+  0%   { transform: translate3d(3%, 1%, 0) scale(1.2); }
+  100% { transform: translate3d(-4%, -1%, 0) scale(1.32); }
 }
 
-.logo-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+/* Brilho pulsante atrás de elementos-chave */
+@keyframes auraPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%      { opacity: 0.6;  transform: scale(1.12); }
+}
+.aura {
+  animation: auraPulse 6s ease-in-out infinite;
 }
 
-.logo-wrapper::before {
-  content: '';
-  position: absolute;
-  inset: -28px;
-  background: radial-gradient(ellipse at center, rgba(200, 116, 26, 0.45) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: smoke 4s ease-in-out infinite;
-  filter: blur(16px);
-  z-index: -1;
-  pointer-events: none;
+/* Reveal padrão (fallback CSS p/ no-JS já tratado pelo framer) */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.float-y { animation: floatY 5s ease-in-out infinite; }
+
+/* Linha-grade sutil para seções técnicas */
+.grid-fade {
+  background-image:
+    linear-gradient(to right, rgba(124,108,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124,108,255,0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-drift, .cloud-drift-slow, .aura, .float-y { animation: none; }
+  html { scroll-behavior: auto; }
 }

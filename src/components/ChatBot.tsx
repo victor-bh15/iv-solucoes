@@ -298,7 +298,7 @@ export default function ChatBot() {
                     <p className="font-bold text-white text-sm leading-tight">
                       IVY · Gênio da IV Soluções
                     </p>
-                    <p className="text-xs text-orange-100">Online agora</p>
+                    <p className="text-xs text-white/70">Online agora</p>
                   </div>
                   <button
                     onClick={reset}

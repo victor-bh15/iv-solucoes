@@ -2,6 +2,7 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
+import Differentials from '@/components/Differentials';
 import Process from '@/components/Process';
 import Portfolio from '@/components/Portfolio';
 import Manifesto from '@/components/Manifesto';
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <Differentials />
         <Process />
         <Portfolio />
         <Manifesto />

@@ -13,7 +13,7 @@ export default function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -28,27 +28,24 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0A0A0A]/95 backdrop-blur-md shadow-lg shadow-black/60'
-          : 'bg-transparent'
+          ? 'bg-[var(--color-bg)]/80 backdrop-blur-xl border-b border-[var(--color-border)]'
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+      <nav className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between h-[72px]">
         {/* Logo */}
-        <a href="#" className="logo-wrapper" aria-label="IV Soluções em IA — Início">
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ filter: 'drop-shadow(0 0 20px #C8741A)' }}
-          >
-            <Image
-              src="/Logo.png"
-              alt="IV Soluções em IA"
-              width={90}
-              height={56}
-              priority
-              className="object-contain"
-            />
-          </motion.div>
+        <a href="#" className="flex items-center gap-2.5 group" aria-label="IV Soluções em IA — Início">
+          <Image
+            src="/logo-iv-white.png"
+            alt="IV Soluções em IA"
+            width={40}
+            height={40}
+            priority
+            className="object-contain h-9 w-9 transition-transform duration-300 group-hover:scale-105"
+          />
+          <span className="font-display font-bold text-ink text-lg tracking-tight">
+            IV <span className="text-muted font-medium">Soluções</span>
+          </span>
         </a>
 
         {/* Desktop Nav */}
@@ -57,7 +54,7 @@ export default function Header() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[#F5F5F5] hover:text-[#C8741A] transition-colors text-sm font-medium tracking-wide"
+                className="text-muted hover:text-ink transition-colors text-sm font-medium tracking-wide"
               >
                 {link.label}
               </a>
@@ -66,17 +63,17 @@ export default function Header() {
         </ul>
 
         {/* Right Side */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <button
             onClick={toggle}
             aria-label={`Trocar idioma para ${lang === 'pt' ? 'inglês' : 'português'}`}
-            className="text-xs font-semibold px-3 py-1.5 rounded-md border border-[#2A2A2A] hover:border-[#C8741A] text-[#8A8A8A] hover:text-[#C8741A] transition-all duration-200"
+            className="text-xs font-semibold px-3 py-1.5 rounded-md border border-[var(--color-border)] hover:border-[var(--color-accent)] text-muted hover:text-ink transition-all duration-200"
           >
             {lang === 'pt' ? 'EN' : 'PT'}
           </button>
           <a
             href="#contato"
-            className="bg-[#C8741A] hover:bg-[#E8840A] text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors shadow-md shadow-[#C8741A]/20"
+            className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-md shadow-[var(--color-accent)]/25"
           >
             {t('nav_cta')}
           </a>
@@ -84,7 +81,7 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-[#F5F5F5] p-1"
+          className="md:hidden text-ink p-1"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Abrir menu"
           aria-expanded={isOpen}
@@ -101,14 +98,14 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-[#0D0D0D] border-t border-[#1E1E1E]"
+            className="md:hidden bg-[var(--color-bg-soft)] border-t border-[var(--color-border)] overflow-hidden"
           >
-            <div className="px-4 py-6 flex flex-col gap-2">
+            <div className="px-5 py-6 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[#F5F5F5] hover:text-[#C8741A] transition-colors font-medium py-3 border-b border-[#1A1A1A] last:border-0"
+                  className="text-ink hover:text-[var(--color-accent)] transition-colors font-medium py-3 border-b border-[var(--color-border-soft)] last:border-0"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
@@ -117,14 +114,14 @@ export default function Header() {
               <div className="flex items-center gap-3 pt-4">
                 <button
                   onClick={() => { toggle(); setIsOpen(false); }}
-                  className="text-sm text-[#8A8A8A] hover:text-[#C8741A] transition-colors"
+                  className="text-sm text-muted hover:text-[var(--color-accent)] transition-colors"
                   aria-label="Trocar idioma"
                 >
                   {lang === 'pt' ? '🇺🇸 English' : '🇧🇷 Português'}
                 </button>
                 <a
                   href="#contato"
-                  className="ml-auto bg-[#C8741A] hover:bg-[#E8840A] text-white text-sm font-medium px-5 py-2.5 rounded-lg"
+                  className="ml-auto bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('nav_cta')}
