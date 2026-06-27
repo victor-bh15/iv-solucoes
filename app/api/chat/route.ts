@@ -47,7 +47,7 @@ PROJETOS JÁ ENTREGUES:
 
 CONTATO:
 - WhatsApp: (31) 99671-5639 — canal principal.
-- E-mail: contato@ivsolucoes.com.br
+- E-mail: victor-bh15@hotmail.com
 - Atendimento: todos os dias, das 07h às 22h.
 - Ainda não há endereço físico nem redes sociais.
 
