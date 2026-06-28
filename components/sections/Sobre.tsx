@@ -31,7 +31,7 @@ export function Sobre({ showHeading = true }: { showHeading?: boolean }) {
 
           {/* Logo da marca, sem fundo atrás (transparente nos dois temas) */}
           <Reveal delay={120} className="flex justify-center">
-            <div className="w-full max-w-sm px-4">
+            <div className="w-full max-w-sm px-4 -mt-8 sm:-mt-12 lg:-mt-16">
               {/* Versão escura — para o tema claro */}
               <Image
                 src="/logo.png"
