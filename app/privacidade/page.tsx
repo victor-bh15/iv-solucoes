@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -25,6 +26,22 @@ export default function PrivacidadePage() {
           O tratamento de dados do site está descrito nas seções 1 a 3; o aplicativo
           <strong className="text-foreground"> Ponto Eletrônico</strong> é tratado na seção 4.
         </p>
+
+        <div className="rounded-lg border border-border p-4">
+          <p>
+            O aplicativo{" "}
+            <strong className="text-foreground">Villas Park III</strong> (gestão de condomínio)
+            possui Política de Privacidade própria, com o detalhamento dos dados, finalidades e
+            bases legais específicos:{" "}
+            <Link
+              href="/privacidade/villas-park"
+              className="text-brand underline transition-colors hover:text-foreground"
+            >
+              ver a Política do Villas Park III
+            </Link>
+            .
+          </p>
+        </div>
 
         <div>
           <h2 className="text-lg font-semibold text-foreground">1. Quem é o responsável</h2>
