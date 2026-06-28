@@ -36,8 +36,8 @@ export function Sobre({ showHeading = true }: { showHeading?: boolean }) {
               <Image
                 src="/logo.png"
                 alt="Logotipo da IV Soluções"
-                width={1144}
-                height={720}
+                width={424}
+                height={411}
                 className="h-auto w-full dark:hidden"
                 priority
               />
@@ -45,8 +45,8 @@ export function Sobre({ showHeading = true }: { showHeading?: boolean }) {
               <Image
                 src="/logo-light.png"
                 alt="Logotipo da IV Soluções"
-                width={1144}
-                height={720}
+                width={424}
+                height={411}
                 className="hidden h-auto w-full dark:block"
                 priority
               />
