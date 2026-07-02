@@ -11,12 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/portfolio",
     "/contato",
     "/privacidade",
+    "/privacidade/villas-park",
   ];
   const lastModified = new Date();
   return routes.map((path) => ({
     url: `${site.url}${path}`,
     lastModified,
     changeFrequency: "monthly",
-    priority: path === "" ? 1 : path === "/privacidade" ? 0.3 : 0.8,
+    priority: path.startsWith("/privacidade") ? 0.3 : path === "" ? 1 : 0.8,
   }));
 }
