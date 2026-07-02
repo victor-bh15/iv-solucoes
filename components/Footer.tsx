@@ -8,7 +8,7 @@ import { site, whatsappLink } from "@/lib/site";
 
 export function Footer() {
   const { t } = useLang();
-  const year = 2026;
+  const year = new Date().getFullYear();
 
   const links = [
     { href: "/sobre", label: t.nav.about },
