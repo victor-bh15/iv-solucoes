@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { X, Send } from "lucide-react";
-import { useLang } from "@/components/providers/LanguageProvider";
-import { whatsappLink } from "@/lib/site";
+import { DICT, type Lang, whatsappLink } from "@/lib/i18n";
 
-/** Logo do chatbot: um CHIP com "IV" escrito (identidade IV Soluções). */
+/** Ícone do assistente: chip com "IV" (identidade IV Soluções). */
 function ChipIVIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -18,11 +16,8 @@ function ChipIVIcon({ className }: { className?: string }) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      {/* corpo do chip */}
       <rect x="9" y="9" width="14" height="14" rx="2.5" />
-      {/* pinos (4 lados) */}
       <path d="M13 9V5.5M16 9V5.5M19 9V5.5M13 23v3.5M16 23v3.5M19 23v3.5M9 13H5.5M9 16H5.5M9 19H5.5M23 13h3.5M23 16h3.5M23 19h3.5" />
-      {/* IV no centro */}
       <text
         x="16"
         y="19.9"
@@ -41,8 +36,8 @@ function ChipIVIcon({ className }: { className?: string }) {
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-export function Chatbot() {
-  const { t, lang } = useLang();
+export default function Chatbot({ lang }: { lang: Lang }) {
+  const t = DICT[lang].chatbot;
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -50,7 +45,10 @@ export function Chatbot() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages, loading]);
 
   async function send() {
@@ -66,25 +64,20 @@ export function Chatbot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          lang,
-          messages: next.filter((m) => m.role === "user" || m.role === "assistant"),
-        }),
+        body: JSON.stringify({ lang, messages: next }),
       });
 
-      // Rate-limit: mensagem específica em vez do erro genérico.
       if (res.status === 429) {
-        setMessages([...next, { role: "assistant", content: t.chatbot.rate }]);
+        setMessages([...next, { role: "assistant", content: t.rate }]);
         return;
       }
-
       if (!res.ok) throw new Error("bad response");
       const data = await res.json();
       if (!data?.reply) throw new Error("no reply");
 
       setMessages([...next, { role: "assistant", content: data.reply }]);
     } catch {
-      setMessages([...next, { role: "assistant", content: t.chatbot.error }]);
+      setMessages([...next, { role: "assistant", content: t.error }]);
     } finally {
       setLoading(false);
     }
@@ -92,11 +85,10 @@ export function Chatbot() {
 
   return (
     <>
-      {/* Rótulo "Fale com a IA" ao lado do botão (desktop, quando fechado) —
-          deixa claro que ali é o atendimento. */}
+      {/* Rótulo ao lado do botão (desktop, fechado) — deixa claro que é a IA */}
       {!open && (
-        <span className="fixed bottom-[1.85rem] right-[5.25rem] z-50 hidden rounded-full border border-border bg-surface/90 px-3.5 py-2 text-xs font-semibold text-foreground shadow-lg shadow-black/30 backdrop-blur md:block">
-          {lang === "en" ? "Talk to our AI" : "Fale com a IA"}
+        <span className="fixed right-21 bottom-7 z-40 hidden rounded-sm border border-white/20 bg-iv-panel/90 px-3 py-1.5 text-xs text-white/80 backdrop-blur-sm md:block">
+          {t.label}
         </span>
       )}
 
@@ -104,43 +96,45 @@ export function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? t.chatbot.close : t.chatbot.open}
-        style={{
-          backgroundImage: "linear-gradient(135deg, #2563eb, #5b6bff, #7c5cff)",
-        }}
-        className="group fixed bottom-5 right-5 z-60 flex h-16 w-16 items-center justify-center rounded-full text-white shadow-xl shadow-black/40 ring-2 ring-white/25 transition-transform duration-300 hover:scale-110 focus-visible:scale-110"
+        aria-label={open ? t.close : t.open}
+        className="fixed right-5 bottom-5 z-40 flex h-13 w-13 items-center justify-center rounded-full border border-iv-mist/40 bg-iv-navy/90 text-white/90 backdrop-blur-sm transition-all hover:border-iv-mist hover:bg-iv-navy"
       >
-        {open ? <X className="h-6 w-6" /> : <ChipIVIcon className="h-9 w-9" />}
+        {open ? (
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        ) : (
+          <ChipIVIcon className="h-8 w-8" />
+        )}
       </button>
 
       {/* Janela do chat */}
       {open && (
         <div
           role="dialog"
-          aria-label={t.chatbot.title}
-          className="fixed bottom-24 right-5 z-50 flex h-[min(560px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl shadow-black/50"
+          aria-label={t.title}
+          className="fixed right-5 bottom-21 z-40 flex h-[min(540px,calc(100dvh-7rem))] w-[min(370px,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-sm border border-white/15 bg-iv-panel/95 backdrop-blur-md"
         >
           {/* Cabeçalho */}
-          <div className="flex items-center gap-3 bg-linear-to-br from-electric via-iris to-violet px-4 py-3.5 text-white">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
+          <div className="flex items-center gap-3 border-b border-white/10 bg-iv-navy/60 px-4 py-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-sm border border-white/15 text-white/90">
               <ChipIVIcon className="h-6 w-6" />
             </span>
             <div className="min-w-0">
-              <p className="font-display text-sm font-bold leading-tight">
-                {t.chatbot.title}
-              </p>
-              <p className="truncate text-xs text-white/70">
-                {t.chatbot.subtitle}
-              </p>
+              <p className="text-sm text-white">{t.title}</p>
+              <p className="truncate text-xs text-white/55">{t.subtitle}</p>
             </div>
           </div>
 
           {/* Mensagens */}
-          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
-            {/* Mensagem de boas-vindas (sempre visível, acompanha o idioma) */}
+          <div
+            ref={scrollRef}
+            aria-live="polite"
+            className="flex-1 space-y-3 overflow-y-auto p-4"
+          >
             <div className="flex justify-start">
-              <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-bl-sm bg-surface-2 px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
-                {t.chatbot.welcome}
+              <div className="max-w-[85%] rounded-sm bg-white/8 px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-white/85">
+                {t.welcome}
               </div>
             </div>
 
@@ -150,10 +144,10 @@ export function Chatbot() {
                 className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                  className={`max-w-[85%] rounded-sm px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
                     m.role === "user"
-                      ? "rounded-br-sm bg-iris text-white"
-                      : "rounded-bl-sm bg-surface-2 text-foreground"
+                      ? "bg-iv-navy text-white"
+                      : "bg-white/8 text-white/85"
                   }`}
                 >
                   {m.content}
@@ -163,10 +157,10 @@ export function Chatbot() {
 
             {loading && (
               <div className="flex justify-start">
-                <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-sm bg-background px-4 py-3">
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-muted [animation-delay:-0.3s]" />
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-muted [animation-delay:-0.15s]" />
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-muted" />
+                <div className="flex items-center gap-1.5 rounded-sm bg-white/8 px-4 py-3">
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-iv-mist [animation-delay:-0.3s]" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-iv-mist [animation-delay:-0.15s]" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-iv-mist" />
                 </div>
               </div>
             )}
@@ -174,12 +168,12 @@ export function Chatbot() {
 
           {/* Atalho para o WhatsApp */}
           <a
-            href={whatsappLink(t.contact.defaultMessage)}
+            href={whatsappLink(DICT[lang].contact.defaultMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-4 mb-2 rounded-lg bg-[#25D366]/10 px-3 py-2 text-center text-xs font-medium text-[#128C4A] transition-colors hover:bg-[#25D366]/20 dark:text-[#3ddc84]"
+            className="mx-4 mb-2 rounded-sm border border-white/15 px-3 py-2 text-center text-xs text-white/70 transition-colors hover:border-iv-mist hover:text-white"
           >
-            {t.chatbot.whatsappFallback}
+            {t.whatsappFallback}
           </a>
 
           {/* Campo de envio */}
@@ -188,24 +182,30 @@ export function Chatbot() {
               e.preventDefault();
               send();
             }}
-            className="flex items-center gap-2 border-t border-border p-3"
+            className="flex items-center gap-2 border-t border-white/10 p-3"
           >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={t.chatbot.placeholder}
-              aria-label={t.chatbot.placeholder}
+              placeholder={t.placeholder}
+              aria-label={t.placeholder}
               maxLength={1000}
-              className="flex-1 rounded-full border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-brand"
+              autoComplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
+              className="flex-1 rounded-sm border border-white/15 bg-transparent px-3.5 py-2 text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-iv-mist"
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              aria-label={t.chatbot.send}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-iris text-white transition-colors hover:bg-violet disabled:opacity-40"
+              aria-label={t.send}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-iv-mist/50 text-white/90 transition-colors hover:border-iv-mist hover:bg-iv-navy disabled:opacity-40"
             >
-              <Send className="h-4 w-4" aria-hidden="true" />
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
             </button>
           </form>
         </div>

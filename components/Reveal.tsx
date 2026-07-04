@@ -1,53 +1,47 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-type RevealProps = {
-  children: React.ReactNode;
-  className?: string;
-  /** Atraso em ms para escalonar elementos em sequência */
-  delay?: number;
-  as?: "div" | "section" | "li" | "article";
-};
-
-/**
- * Revela o conteúdo com uma animação sutil de "subir e aparecer" (mola) quando
- * ele entra na tela. Respeita prefers-reduced-motion: nesse caso aparece
- * imediatamente, sem movimento.
- */
-export function Reveal({
+/** Revela o conteúdo ao entrar no viewport (uma vez). Respeita reduced-motion via CSS. */
+export default function Reveal({
   children,
   className = "",
   delay = 0,
-  as = "div",
-}: RevealProps) {
-  const reduce = useReducedMotion();
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
 
-  const variants: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 24 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 90,
-        damping: 20,
-        delay: delay / 1000,
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    // sem IntersectionObserver (browser antigo/embed): mostra direto
+    if (typeof IntersectionObserver === "undefined") {
+      el.classList.add("iv-revealed");
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("iv-revealed");
+          io.disconnect();
+        }
       },
-    },
-  };
-
-  const MotionTag = motion[as];
+      { threshold: 0.15 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <MotionTag
-      className={className}
-      variants={variants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+    <div
+      ref={ref}
+      className={`iv-reveal ${className}`}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
-    </MotionTag>
+    </div>
   );
 }

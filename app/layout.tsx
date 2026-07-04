@@ -1,31 +1,19 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { LanguageProvider } from "@/components/providers/LanguageProvider";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { Chatbot } from "@/components/Chatbot";
-import { Analytics } from "@/components/Analytics";
-import { SpaceBackground } from "@/components/SpaceBackground";
-import { IntroSplash } from "@/components/IntroSplash";
-import { site } from "@/lib/site";
 
-const inter = Inter({
-  variable: "--font-inter",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL("https://ivsolucoes.com.br"),
   title: {
     default: "IV Soluções — IA, Sistemas e Sites sob medida",
     template: "%s | IV Soluções",
@@ -48,79 +36,34 @@ export const metadata: Metadata = {
     title: "IV Soluções — IA, Sistemas e Sites sob medida",
     description:
       "Inteligências artificiais, sistemas e sites sob medida para o seu negócio.",
-    url: site.url,
-    images: [{ url: "/logo.png", alt: "IV Soluções" }],
+    url: "https://ivsolucoes.com.br",
+    images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "IV Soluções — IA, Sistemas e Sites sob medida",
     description:
       "Inteligências artificiais, sistemas e sites sob medida para o seu negócio.",
-    images: ["/logo.png"],
+    images: ["/og.jpg"],
   },
-  robots: { index: true, follow: true },
 };
-
-// Cor da barra do navegador (mobile) por tema — alinhada à marca.
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f7fb" },
-    { media: "(prefers-color-scheme: dark)", color: "#07070a" },
-  ],
-  width: "device-width",
-  initialScale: 1,
-};
-
-// Roda ANTES da primeira pintura. (1) Aplica o tema (.dark) e o idioma para
-// evitar flash. (2) Liga a trava de scroll da abertura (#iv-splash já vem no
-// HTML do servidor e é mostrado pelo CSS), garantindo que a MARCA apareça na
-// hora ao abrir/atualizar, sem o conteúdo surgir antes da intro.
-const bootScript = `
-(function() {
-  try {
-    var el = document.documentElement;
-    el.classList.add('dark'); // o site inicia SEMPRE no escuro
-    var lang = localStorage.getItem('iv-lang');
-    if (lang === 'en') el.lang = 'en';
-    // Abertura toca só 1x por visita (sessão). Em reloads/navegação seguintes, pula.
-    if (!sessionStorage.getItem('iv-splash-seen')) el.classList.add('iv-splash-active');
-  } catch (e) {}
-})();
-`;
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="pt-BR"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
-      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
-      </head>
-      <body className="flex min-h-full flex-col bg-background text-foreground">
-        <IntroSplash />
-        <ThemeProvider>
-          <SpaceBackground />
-          <LanguageProvider>
-            <a
-              href="#conteudo"
-              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-navy-700 focus:px-4 focus:py-2 focus:text-white"
-            >
-              Pular para o conteúdo
-            </a>
-            <Header />
-            <main id="conteudo" className="flex-1">
-              {children}
-            </main>
-            <Footer />
-            <WhatsAppButton />
-            <Chatbot />
-          </LanguageProvider>
-        </ThemeProvider>
-        <Analytics />
+      <body className="min-h-full flex flex-col">
+        {/* sem JS, o conteúdo aparece direto (Reveal depende de JS) */}
+        <noscript>
+          <style>{`.iv-reveal{opacity:1 !important;transform:none !important}`}</style>
+        </noscript>
+        {children}
       </body>
     </html>
   );
