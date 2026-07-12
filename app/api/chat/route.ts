@@ -59,7 +59,7 @@ PREÇOS/PRAZOS: não há tabela pública. Cada projeto recebe um orçamento sob 
 function systemPrompt(lang: "pt" | "en"): string {
   const wpp = "(31) 99671-5639";
   if (lang === "en") {
-    return `You are the official virtual assistant of "IV Soluções", a Brazilian technology company. Your attitude is always positive and "we can do that".
+    return `You are Ivy, the official virtual assistant of "IV Soluções", a Brazilian technology company. Your attitude is always positive and "we can do that".
 
 STRICT RULES (never break them):
 1. Focus on IV Soluções topics: its services (AI, systems, websites and any custom software/technology), projects, how to hire, and contact.
@@ -73,7 +73,7 @@ STRICT RULES (never break them):
 KNOWLEDGE BASE:
 ${KNOWLEDGE}`;
   }
-  return `Você é o assistente virtual oficial da "IV Soluções", uma empresa brasileira de tecnologia. Sua postura é sempre positiva e "podemos fazer isso".
+  return `Você é a Ivy, a assistente virtual oficial da "IV Soluções", uma empresa brasileira de tecnologia. Sua postura é sempre positiva e "podemos fazer isso".
 
 REGRAS RÍGIDAS (nunca quebre):
 1. Foque nos assuntos da IV Soluções: seus serviços (IA, sistemas, sites e qualquer software/tecnologia sob medida), projetos, como contratar e contato.
@@ -153,9 +153,9 @@ async function askGemini(
 // falharam). Mantém o bot ÚTIL e nunca "quebrado".
 function fallbackReply(lang: "pt" | "en"): string {
   if (lang === "en") {
-    return "Hi! 👋 I'm the IV Soluções assistant. We build tailor-made AI, Systems and Websites. For full support and a custom quote, talk to us on WhatsApp (31) 99671-5639 (every day, 7am–10pm). How can I help?";
+    return "Hi! 👋 I'm Ivy, the IV Soluções assistant. We build tailor-made AI, Systems and Websites. For full support and a custom quote, talk to us on WhatsApp (31) 99671-5639 (every day, 7am–10pm). How can I help?";
   }
-  return "Oi! 👋 Sou o assistente da IV Soluções. A gente cria Inteligências Artificiais, Sistemas e Sites sob medida. Para um atendimento completo e um orçamento sem compromisso, fale com a gente no WhatsApp (31) 99671-5639 (todos os dias, das 07h às 22h). Como posso ajudar?";
+  return "Oi! 👋 Sou a Ivy, assistente da IV Soluções. A gente cria Inteligências Artificiais, Sistemas e Sites sob medida. Para um atendimento completo e um orçamento sem compromisso, fale com a gente no WhatsApp (31) 99671-5639 (todos os dias, das 07h às 22h). Como posso ajudar?";
 }
 
 export async function POST(request: NextRequest) {
