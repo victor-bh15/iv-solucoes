@@ -771,9 +771,10 @@ export type SolutionSlug = keyof typeof DICT.pt.solutionPages.items;
 export const WHATSAPP_NUMBER = "5531996715639";
 export const WHATSAPP_DISPLAY = "(31) 99671-5639";
 export const EMAIL = "victor-bh15@hotmail.com";
-/** E-mail do encarregado (DPO) — placeholder até decisão do Victor sobre domínio final.
- * Usar SÓ no card de encarregado de /seguranca; o EMAIL geral (contato/WhatsApp) fica intacto. */
-export const DPO_EMAIL = "encarregado@ivsolucoes.com.br";
+/** E-mail do encarregado (DPO). Aponta pro e-mail que RECEBE hoje (EMAIL geral) —
+ * `encarregado@ivsolucoes.com.br` ainda não existe e daria bounce numa página de LGPD.
+ * TODO: trocar pelo institucional quando o e-mail de domínio for criado (frente parqueada). */
+export const DPO_EMAIL = EMAIL;
 export const INSTAGRAM_URL = "https://www.instagram.com/iv.solucoes";
 
 export function whatsappLink(message: string): string {
