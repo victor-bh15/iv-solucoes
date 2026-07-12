@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -48,17 +44,29 @@ export const metadata: Metadata = {
   },
 };
 
+// Falha-segura (playbook Fable): habilita a classe `js` no <html> ANTES de
+// qualquer reveal — se o script falhar, o CSS estático já mostra tudo.
+// Garantidor independente: revela qualquer .iv-reveal ainda oculto após 1.4s
+// (cobre falha silenciosa do IntersectionObserver/React).
+const BOOT_SCRIPT = `
+document.documentElement.classList.add('js');
+setTimeout(function () {
+  document.querySelectorAll('.iv-reveal:not(.iv-revealed)').forEach(function (el) {
+    el.classList.add('iv-revealed');
+  });
+}, 1400);
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="pt-BR" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        {/* script inline no INÍCIO do body — nunca ancorado em `load` */}
+        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
         {/* sem JS, o conteúdo aparece direto (Reveal depende de JS) */}
         <noscript>
           <style>{`.iv-reveal{opacity:1 !important;transform:none !important}`}</style>

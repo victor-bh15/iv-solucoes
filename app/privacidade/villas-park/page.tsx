@@ -8,53 +8,53 @@ export const metadata: Metadata = {
 };
 
 const th =
-  "border-b border-white/10 px-3 py-2 text-left text-sm font-medium text-white align-top";
-const td = "border-b border-white/10 px-3 py-2 text-sm align-top";
+  "border-b border-line px-3 py-2 text-left text-sm font-medium text-ink align-top";
+const td = "border-b border-line px-3 py-2 text-sm align-top";
 
 export default function PrivacidadeVillasParkPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-24">
       <Link
         href="/"
-        className="text-sm text-iv-mist transition-colors hover:text-white"
+        className="text-sm text-iv-azul transition-colors hover:text-ink"
       >
         ← IV Soluções
       </Link>
 
-      <p className="mt-10 text-xs tracking-[0.25em] text-iv-mist uppercase">
+      <p className="mt-10 text-xs tracking-[0.25em] text-iv-azul uppercase">
         Privacidade
       </p>
-      <h1 className="mt-4 text-3xl font-light tracking-tight text-white sm:text-4xl">
+      <h1 className="mt-4 text-3xl font-light tracking-tight text-ink sm:text-4xl">
         Política de Privacidade — Villas Park III
       </h1>
-      <p className="mt-3 text-sm text-white/50">
+      <p className="mt-3 text-sm text-ink/50">
         Última atualização: 28 de junho de 2026
       </p>
 
-      <div className="mt-12 text-sm leading-relaxed text-white/70">
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+      <div className="mt-12 text-sm leading-relaxed text-ink/70">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           1. Apresentação
         </h2>
         <p>
           Esta Política de Privacidade descreve como são tratados os dados pessoais coletados pelo
-          aplicativo <strong className="text-white">Villas Park III</strong> (o
+          aplicativo <strong className="text-ink">Villas Park III</strong> (o
           &ldquo;Aplicativo&rdquo;), um aplicativo web progressivo (PWA) de gestão de condomínio.
           Este documento está em conformidade com a{" "}
-          <strong className="text-white">
+          <strong className="text-ink">
             Lei nº 13.709/2018 — Lei Geral de Proteção de Dados Pessoais (LGPD)
           </strong>
           . Ao utilizar o Aplicativo, você (&ldquo;Titular&rdquo;) declara estar ciente das
           condições aqui descritas.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           2. Identificação do Controlador e do Operador
         </h2>
         <p>
           A LGPD distingue dois papéis no tratamento de dados. No contexto do Aplicativo Villas
           Park III:
         </p>
-        <div className="mt-4 overflow-x-auto border border-white/10">
+        <div className="mt-4 overflow-x-auto border border-line">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr>
@@ -66,7 +66,7 @@ export default function PrivacidadeVillasParkPage() {
             <tbody>
               <tr>
                 <td className={td}>
-                  <strong className="text-white">Controlador</strong>
+                  <strong className="text-ink">Controlador</strong>
                 </td>
                 <td className={td}>Condomínio Villas Park III</td>
                 <td className={td}>
@@ -76,7 +76,7 @@ export default function PrivacidadeVillasParkPage() {
               </tr>
               <tr>
                 <td className={td}>
-                  <strong className="text-white">Operador</strong>
+                  <strong className="text-ink">Operador</strong>
                 </td>
                 <td className={td}>IV Soluções</td>
                 <td className={td}>
@@ -88,67 +88,67 @@ export default function PrivacidadeVillasParkPage() {
           </table>
         </div>
         <p className="mt-3">
-          O <strong className="text-white">Condomínio Villas Park III</strong>, na qualidade
+          O <strong className="text-ink">Condomínio Villas Park III</strong>, na qualidade
           de Controlador, é o responsável pelas decisões sobre o tratamento dos seus dados. A
           IV Soluções, como Operadora, atua exclusivamente conforme as instruções do Condomínio e
           os termos desta Política.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           3. Dados Pessoais Coletados
         </h2>
         <p>O Aplicativo coleta e trata os seguintes dados:</p>
         <ul className="mt-2 list-disc space-y-1 pl-5">
           <li>
-            <strong className="text-white">Dados de conta e identificação:</strong> nome do
+            <strong className="text-ink">Dados de conta e identificação:</strong> nome do
             morador, unidade (bloco/apartamento), papel no condomínio (morador, zelador, porteiro,
             síndico, administrador) e credencial de acesso (PIN/senha, sempre armazenada de forma
             cifrada).
           </li>
           <li>
-            <strong className="text-white">Foto de perfil (avatar):</strong> imagem opcional,
+            <strong className="text-ink">Foto de perfil (avatar):</strong> imagem opcional,
             enviada pelo próprio morador. É um dado pessoal e seu envio é facultativo.
           </li>
           <li>
-            <strong className="text-white">Dados de visitantes:</strong> nome, documento e
+            <strong className="text-ink">Dados de visitantes:</strong> nome, documento e
             datas de visita, informados pelo próprio morador (ver Seção 4 sobre a responsabilidade
             do morador ao informar dados de terceiros).
           </li>
           <li>
-            <strong className="text-white">Encomendas:</strong> descrição e remetente da
+            <strong className="text-ink">Encomendas:</strong> descrição e remetente da
             encomenda registrada na portaria.
           </li>
           <li>
-            <strong className="text-white">Ouvidoria:</strong> manifestações (queixas,
+            <strong className="text-ink">Ouvidoria:</strong> manifestações (queixas,
             dúvidas, elogios e sugestões), que podem conter opiniões e dados pessoais fornecidos
             voluntariamente pelo morador.
           </li>
           <li>
-            <strong className="text-white">Reservas, Censo e adimplência:</strong> reservas
+            <strong className="text-ink">Reservas, Censo e adimplência:</strong> reservas
             da área gourmet; respostas ao Censo/Pesquisa da unidade; e indicador de adimplência
             (status de bloqueio de funcionalidades), informado pela administração do condomínio.
           </li>
           <li>
-            <strong className="text-white">Notificações push:</strong> endpoint/token do
+            <strong className="text-ink">Notificações push:</strong> endpoint/token do
             dispositivo e chaves criptográficas necessárias para o envio de avisos.
           </li>
           <li>
-            <strong className="text-white">Assistente virtual &ldquo;Lineu&rdquo;:</strong>{" "}
+            <strong className="text-ink">Assistente virtual &ldquo;Lineu&rdquo;:</strong>{" "}
             perguntas digitadas livremente pelo morador, processadas por inteligência artificial
             (ver Seção 6).
           </li>
           <li>
-            <strong className="text-white">Logs técnicos e de auditoria:</strong> endereço
+            <strong className="text-ink">Logs técnicos e de auditoria:</strong> endereço
             IP, identificação do navegador/dispositivo (user-agent) e registros de acesso e de
             ações realizadas no Aplicativo.
           </li>
         </ul>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           4. Dados de terceiros informados pelo morador
         </h2>
         <p>
-          Ao cadastrar <strong className="text-white">visitantes</strong>, o morador fornece
+          Ao cadastrar <strong className="text-ink">visitantes</strong>, o morador fornece
           dados pessoais de outra pessoa. O morador é responsável por informar ao visitante que
           seus dados (nome, documento e data de visita) serão registrados no Aplicativo para fins
           de controle de acesso do condomínio, e por garantir que possui base legítima para
@@ -156,14 +156,14 @@ export default function PrivacidadeVillasParkPage() {
           controle de portaria.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           5. Finalidades e Bases Legais do Tratamento
         </h2>
         <p>
           Cada tratamento de dado possui uma finalidade específica e uma base legal prevista na
           LGPD (arts. 7º e 11):
         </p>
-        <div className="mt-4 overflow-x-auto border border-white/10">
+        <div className="mt-4 overflow-x-auto border border-line">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr>
@@ -188,7 +188,7 @@ export default function PrivacidadeVillasParkPage() {
               ].map(([d, f, b]) => (
                 <tr key={d}>
                   <td className={td}>
-                    <strong className="text-white">{d}</strong>
+                    <strong className="text-ink">{d}</strong>
                   </td>
                   <td className={td}>{f}</td>
                   <td className={td}>{b}</td>
@@ -198,13 +198,13 @@ export default function PrivacidadeVillasParkPage() {
           </table>
         </div>
         <p className="mt-3">
-          O Aplicativo <strong className="text-white">não tem por finalidade coletar dados
+          O Aplicativo <strong className="text-ink">não tem por finalidade coletar dados
           pessoais sensíveis</strong> (art. 11 da LGPD). Caso o Titular insira voluntariamente
           dados sensíveis em campos abertos (como Ouvidoria ou no assistente &ldquo;Lineu&rdquo;),
           recomenda-se evitar fazê-lo, pois tais campos não foram projetados para essa finalidade.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           6. Assistente Virtual &ldquo;Lineu&rdquo; (Inteligência Artificial)
         </h2>
         <p>
@@ -213,16 +213,16 @@ export default function PrivacidadeVillasParkPage() {
           artificial de terceiros (Google Gemini e DeepSeek — ver Seções 7 e 8).
         </p>
         <p className="mt-3">
-          <strong className="text-white">Importante:</strong> as perguntas digitadas no
+          <strong className="text-ink">Importante:</strong> as perguntas digitadas no
           &ldquo;Lineu&rdquo; são enviadas a esses serviços de IA para processamento.{" "}
-          <strong className="text-white">
+          <strong className="text-ink">
             Recomendamos não inserir dados pessoais ou informações sensíveis nas perguntas
           </strong>{" "}
           (como números de documentos, dados de saúde ou de terceiros), pois o assistente foi
           projetado apenas para esclarecer dúvidas sobre as regras do condomínio.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           7. Compartilhamento e Operadores/Subprocessadores
         </h2>
         <p>
@@ -230,7 +230,7 @@ export default function PrivacidadeVillasParkPage() {
           (operadores/subprocessadores), cada um tratando dados apenas na medida necessária à sua
           função:
         </p>
-        <div className="mt-4 overflow-x-auto border border-white/10">
+        <div className="mt-4 overflow-x-auto border border-line">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr>
@@ -248,7 +248,7 @@ export default function PrivacidadeVillasParkPage() {
               ].map(([s, f, d]) => (
                 <tr key={s}>
                   <td className={td}>
-                    <strong className="text-white">{s}</strong>
+                    <strong className="text-ink">{s}</strong>
                   </td>
                   <td className={td}>{f}</td>
                   <td className={td}>{d}</td>
@@ -258,20 +258,20 @@ export default function PrivacidadeVillasParkPage() {
           </table>
         </div>
         <p className="mt-3">
-          Os dados <strong className="text-white">não são vendidos</strong> nem
+          Os dados <strong className="text-ink">não são vendidos</strong> nem
           compartilhados para fins de marketing de terceiros. O compartilhamento ocorre apenas com
           os subprocessadores acima e quando houver determinação legal ou judicial.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           8. Transferência Internacional de Dados
         </h2>
         <p>
-          Alguns subprocessadores processam dados <strong className="text-white">fora do
+          Alguns subprocessadores processam dados <strong className="text-ink">fora do
           Brasil</strong>, o que caracteriza transferência internacional de dados nos termos dos
           arts. 33 a 36 da LGPD:
         </p>
-        <div className="mt-4 overflow-x-auto border border-white/10">
+        <div className="mt-4 overflow-x-auto border border-line">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr>
@@ -289,7 +289,7 @@ export default function PrivacidadeVillasParkPage() {
               ].map(([s, p, o]) => (
                 <tr key={s}>
                   <td className={td}>
-                    <strong className="text-white">{s}</strong>
+                    <strong className="text-ink">{s}</strong>
                   </td>
                   <td className={td}>{p}</td>
                   <td className={td}>{o}</td>
@@ -302,7 +302,7 @@ export default function PrivacidadeVillasParkPage() {
           Ao utilizar o assistente &ldquo;Lineu&rdquo;, o texto das suas perguntas pode ser
           transmitido a servidores nos Estados Unidos (Google) e na China (DeepSeek). Esses países
           podem ter níveis de proteção de dados distintos dos previstos na legislação brasileira.{" "}
-          <strong className="text-white">
+          <strong className="text-ink">
             Por isso reforçamos a recomendação de não inserir dados pessoais nas perguntas ao
             assistente.
           </strong>{" "}
@@ -310,7 +310,7 @@ export default function PrivacidadeVillasParkPage() {
           garantias contratuais aplicáveis a cada prestador.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           9. Direitos do Titular (art. 18 da LGPD)
         </h2>
         <p>Você, como Titular dos dados, tem direito a:</p>
@@ -331,14 +331,14 @@ export default function PrivacidadeVillasParkPage() {
           <li>Revogação do consentimento.</li>
         </ul>
         <p className="mt-3">
-          <strong className="text-white">Como exercer:</strong> os pedidos devem ser
-          dirigidos ao <strong className="text-white">Condomínio Villas Park III</strong>{" "}
+          <strong className="text-ink">Como exercer:</strong> os pedidos devem ser
+          dirigidos ao <strong className="text-ink">Condomínio Villas Park III</strong>{" "}
           (Controlador), por meio do canal de Ouvidoria do próprio Aplicativo ou do contato
           indicado na Seção 14. A IV Soluções, como Operadora, auxiliará o Condomínio no
           atendimento das solicitações.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           10. Prazo de Retenção
         </h2>
         <p>
@@ -349,7 +349,7 @@ export default function PrivacidadeVillasParkPage() {
           guarda obrigatória previstas em lei (art. 16 da LGPD).
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           11. Segurança da Informação
         </h2>
         <p>
@@ -361,31 +361,31 @@ export default function PrivacidadeVillasParkPage() {
           providências e comunicações exigidas pela LGPD (art. 48).
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           12. Cookies e Armazenamento Local
         </h2>
         <p>
-          O Aplicativo é um PWA e utiliza <strong className="text-white">service
-          worker</strong> e <strong className="text-white">armazenamento local</strong> no
+          O Aplicativo é um PWA e utiliza <strong className="text-ink">service
+          worker</strong> e <strong className="text-ink">armazenamento local</strong> no
           seu dispositivo para: permitir o funcionamento offline, manter sua sessão autenticada e
           melhorar o desempenho. Esses recursos são essenciais ao funcionamento do Aplicativo.
           Você pode limpar o armazenamento local nas configurações do seu navegador/dispositivo,
           ciente de que isso pode afetar a experiência de uso.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           13. Tratamento de Dados de Crianças e Adolescentes
         </h2>
         <p>
           O Aplicativo destina-se à gestão condominial e ao uso por moradores adultos responsáveis
-          pela unidade. <strong className="text-white">Não há coleta intencional de dados de
+          pela unidade. <strong className="text-ink">Não há coleta intencional de dados de
           crianças e adolescentes.</strong> Caso dados de menores sejam eventualmente informados
           (por exemplo, como dependentes da unidade), seu tratamento observará o melhor interesse
           do menor, nos termos do art. 14 da LGPD, sob responsabilidade do Condomínio e do
           responsável legal que os informar.
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           14. Encarregado pela Proteção de Dados (DPO)
         </h2>
         <p>
@@ -396,14 +396,14 @@ export default function PrivacidadeVillasParkPage() {
         <p className="mt-3">
           <a
             href="mailto:victor-bh15@hotmail.com"
-            className="text-iv-mist underline transition-colors hover:text-white"
+            className="text-iv-azul underline transition-colors hover:text-ink"
           >
             victor-bh15@hotmail.com
           </a>
           .
         </p>
 
-        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-white">
+        <h2 className="mt-12 mb-4 text-xl font-light tracking-tight text-ink">
           15. Alterações nesta Política
         </h2>
         <p>
@@ -412,13 +412,13 @@ export default function PrivacidadeVillasParkPage() {
           consulta periódica.
         </p>
 
-        <p className="mt-12 border-t border-white/10 pt-6 text-xs text-white/50">
+        <p className="mt-12 border-t border-line pt-6 text-xs text-ink/50">
           Fonte legal consultada:{" "}
           <a
             href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-iv-mist underline transition-colors hover:text-white"
+            className="text-iv-azul underline transition-colors hover:text-ink"
           >
             Lei nº 13.709/2018 — LGPD (Planalto)
           </a>
