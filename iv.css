@@ -591,7 +591,7 @@ body.palco .colofao { border-top-color: rgba(255, 255, 255, 0.08); color: #8B96A
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .pal input { width: 100%; font: inherit; font-size: 15px; padding: 16px 18px; border: none; border-bottom: 1px solid var(--hair); background: transparent; color: var(--ink); }
-.pal input:focus { outline: none; }
+.pal input:focus { outline: none; border-bottom-color: var(--navy); box-shadow: 0 1px 0 var(--navy); }
 .pal-list { max-height: 320px; overflow-y: auto; padding: 8px; }
 .pal-item { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 12px; border-radius: 9px; font-size: 14px; }
 .pal-item .tipo { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: 0.1em; color: var(--body); }
@@ -839,9 +839,11 @@ body.palco .ticker-track em { color: var(--games); }
   border-radius: 16px;
   box-shadow: 0 40px 90px rgba(1, 40, 79, 0.28);
   overflow: hidden;
+  max-height: calc(100vh - 112px);
+  max-height: calc(100dvh - 112px);
   display: none;
 }
-.byte-panel.on { display: block; animation: bspring 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+.byte-panel.on { display: flex; flex-direction: column; animation: bspring 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes bspring { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
 .byte-head { display: flex; align-items: center; gap: 12px; padding: 13px 16px; background: var(--navy); }
 .byte-head svg { width: 38px; height: 38px; overflow: visible; }
@@ -849,7 +851,7 @@ body.palco .ticker-track em { color: var(--games); }
 .byte-head small { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: 0.1em; color: #7FE0A8; margin-top: 2px; }
 .byte-x { margin-left: auto; color: #9CB4D4; font-size: 20px; line-height: 1; padding: 4px 8px; border-radius: 8px; }
 .byte-x:hover { color: #FFF; background: rgba(255, 255, 255, 0.1); }
-.byte-corpo { padding: 16px; }
+.byte-corpo { padding: 16px; overflow-y: auto; min-height: 0; }
 .byte-balao { background: var(--paper); border: 1px solid var(--hair); border-radius: 4px 14px 14px 14px; padding: 12px 14px; font-size: 13.5px; line-height: 1.55; }
 .byte-acoes { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
 .byte-acao {
