@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IV Soluções — Software que existe</title>
+<meta name="description" content="A IV Soluções projeta, constrói e opera sistemas de gestão para saúde, condomínio e licitação pública — e o IV Games leva placar de estádio para equipes de vendas.">
+<meta property="og:title" content="IV Soluções — Software que existe">
+<meta property="og:description" content="Não vendemos promessa: operamos sistemas. Conheça o que está em produção — e o IV Games.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2301284F'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='%23F2F7FD' text-anchor='middle'%3Eiv%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="iv.css">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="marca" href="index.html"><span class="selo">iv</span><b>IV·Soluções</b></a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="index.html" class="on">Início</a>
+      <a href="sistemas.html">Sistemas</a>
+      <a href="iv-games.html" class="games-link">IV Games</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div class="top-right">
+      <span class="led"><i></i><span>OPERAÇÃO</span></span>
+      <span class="clock" id="clock" aria-hidden="true">--:--:--</span>
+      <a class="cta-top" href="https://wa.me/5531996715639" target="_blank" rel="noopener">Fale conosco</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu">
+  <a href="index.html" class="on">Início</a>
+  <a href="sistemas.html">Sistemas</a>
+  <a href="iv-games.html" class="games-link">IV Games</a>
+  <a href="sobre.html">Sobre</a>
+  <a href="contato.html">Contato</a>
+</nav>
+
+<main style="padding-top:0;">
+  <section class="games-hero home-hero" id="gamesHero">
+    <div class="media" aria-hidden="true">
+      <img src="assets/home-poster.jpg" alt="" fetchpriority="high">
+      <video id="palcoVideo" muted loop playsinline preload="none" poster="assets/home-poster.jpg" data-mp4="assets/home-loop.mp4" data-webm="assets/home-loop.webm"></video>
+    </div>
+    <div class="veu" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow sr">IV Soluções · Belo Horizonte</span>
+      <h1 class="games-title sr" style="font-size:clamp(2.8rem,7vw,5.6rem);">Software que existe<span class="fim">.</span></h1>
+      <p class="games-sub sr"><b>Não vendemos promessa — operamos sistemas.</b> A IV projeta, constrói e opera tecnologia de gestão em produção para saúde, condomínio e licitação pública.</p>
+      <div class="cta-row sr">
+        <a class="btn btn-white" href="sistemas.html">Conhecer os sistemas</a>
+        <a class="btn btn-ghost-claro" href="https://wa.me/5531996715639" target="_blank" rel="noopener">Falar com a IV</a>
+      </div>
+      <p class="typeline" id="typeline" aria-hidden="true"></p>
+    </div>
+  </section>
+
+  <section class="hero-home" style="padding-top:56px;">
+    <div class="wrap">
+      <p class="lead sr" style="margin-top:0;">Tudo abaixo é real, com dados fictícios ou sintéticos nas telas — <b>nunca dado de cliente</b>.</p>
+
+      <div class="bento sr" style="margin-top:32px;">
+        <div class="cell cell-tv">
+          <div class="janela">
+            <div class="jbar" aria-hidden="true"><span class="jselo">iv</span><span class="reg">SIS-006·REG-01</span><span class="jtit">GameON — modo TV</span><span class="jled demo"><i></i>DEMO</span></div>
+            <img src="assets/caso-gameon-tv.jpg" alt="TV do GameON: estádio com torcida e placar do campeonato entre times de vendas" fetchpriority="high">
+          </div>
+          <p class="legenda">↑ GameON, modo TV — tela real, nomes fictícios, motor real.</p>
+        </div>
+        <div class="cell cell-kpi">
+          <div><span class="rot">Em produção</span><p class="num" data-count="5">5</p></div>
+          <small>sistemas em produção — e um sexto em construção com demo pública</small>
+        </div>
+        <div class="cell cell-clock">
+          <span class="rot">BELO HORIZONTE · AGORA</span>
+          <span class="big" id="clockCell" aria-hidden="true">--:--:--</span>
+          <span class="rot"><span class="led"><i></i>SISTEMAS EM OPERAÇÃO</span></span>
+        </div>
+        <div class="cell cell-podio">
+          <div class="janela">
+            <div class="jbar" aria-hidden="true"><span class="jselo">iv</span><span class="reg">REG-02</span><span class="jtit">GameON — pódio</span><span class="jled demo"><i></i>DEMO</span></div>
+            <img src="assets/caso-gameon-podio.jpg" alt="Pódio do GameON com os três primeiros da temporada" loading="lazy">
+          </div>
+        </div>
+        <a class="cell cell-games" href="iv-games.html">
+          <span class="rot">NOVA DIVISÃO DA CASA</span>
+          <b>IV GAMES</b>
+          <span class="ir">jogos que movem equipes → </span>
+        </a>
+        <div class="cell cell-fact">
+          <span class="rot">Auditoria dupla</span>
+          <p><b>Código e tela</b> passam por duas auditorias independentes antes de qualquer publicação — inclusive esta página.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker">SIEM<em>·</em>ChronoMed<em>·</em>IV Home<em>·</em>Órion<em>·</em>Painel de Empenhos<em>·</em>GameON<em>·</em>IV Games<em>·</em></div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <span class="eyebrow sr">Sistemas</span>
+      <h2 class="h-sec sr">Construídos para operações que não podem parar.</h2>
+      <div class="sys-grid">
+        <a class="sys-card sr" href="sistemas.html#sis-001">
+          <span class="num">SIS-001</span>
+          <h3>SIEM — Excelência Médica</h3>
+          <p>Índice de excelência 0–100, ordens de serviço e indicadores para a operação hospitalar.</p>
+          <span class="rodape"><span class="status prod"><i></i>Em produção</span><span class="ver">ver ficha →</span></span>
+        </a>
+        <a class="sys-card sr" href="sistemas.html#sis-002">
+          <span class="num">SIS-002</span>
+          <h3>IV Home</h3>
+          <p>App do morador e painel do síndico — ouvidoria, reservas, O.S. e comunicados.</p>
+          <span class="rodape"><span class="status prod"><i></i>Em produção</span><span class="ver">ver ficha →</span></span>
+        </a>
+        <a class="sys-card sr" href="sistemas.html#sis-003">
+          <span class="num">SIS-003</span>
+          <h3>ChronoMed</h3>
+          <p>Ponto biométrico com localização e escalas de plantão para equipes médicas.</p>
+          <span class="rodape"><span class="status prod"><i></i>Em produção</span><span class="ver">ver ficha →</span></span>
+        </a>
+        <a class="sys-card sr" href="sistemas.html#sis-004">
+          <span class="num">SIS-004</span>
+          <h3>Órion</h3>
+          <p>Assistente de IA que responde com o conhecimento interno da sua operação.</p>
+          <span class="rodape"><span class="status prod"><i></i>Em produção</span><span class="ver">ver ficha →</span></span>
+        </a>
+        <a class="sys-card sr" href="sistemas.html#sis-005">
+          <span class="num">SIS-005</span>
+          <h3>Painel de Empenhos</h3>
+          <p>Licitações, empenhos e pedidos num painel único com indicadores em tempo real.</p>
+          <span class="rodape"><span class="status prod"><i></i>Em produção</span><span class="ver">ver ficha →</span></span>
+        </a>
+        <a class="sys-card sr" href="iv-games.html#gameon">
+          <span class="num">SIS-006</span>
+          <h3>GameON</h3>
+          <p>Campeonato de vendas com placar em TV de estádio, moeda interna e loja de prêmios.</p>
+          <span class="rodape"><span class="status build"><i></i>Em construção</span><span class="ver">ver no IV Games →</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="band-games sr" data-plx>
+        <div>
+          <span class="eyebrow">IV Games</span>
+          <h2>Tecnologia que joga junto.</h2>
+          <p>A divisão de jogos corporativos da IV: placares de estádio, mascotes, moeda e loja de prêmios para transformar meta em campeonato — começando pelo GameON.</p>
+        </div>
+        <a class="btn btn-games" href="iv-games.html">Entrar no IV Games</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <span class="eyebrow sr">O jeito IV</span>
+      <h2 class="h-sec sr">Quem constrói, opera. Quem opera, atende.</h2>
+      <p class="lead sr">Diagnóstico medido na fonte, construção sob medida, auditoria dupla antes de cada publicação e operação contínua — o mesmo pipeline para todo sistema da casa, inclusive este site. <a href="sobre.html" style="color:var(--vivo-txt);font-weight:600;">Conheça a IV →</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="marca" href="index.html"><span class="selo">iv</span><b>IV·Soluções</b></a>
+        <p class="foot-tag">Projetamos, construímos e operamos sistemas para o mundo real — de Belo Horizonte.</p>
+      </div>
+      <div class="foot-col">
+        <b>Site</b>
+        <a href="index.html">Início</a>
+        <a href="sistemas.html">Sistemas</a>
+        <a href="iv-games.html">IV Games</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div class="foot-col">
+        <b>Sistemas</b>
+        <a href="sistemas.html#sis-001">SIEM</a>
+        <a href="sistemas.html#sis-002">IV Home</a>
+        <a href="sistemas.html#sis-003">ChronoMed</a>
+        <a href="sistemas.html#sis-004">Órion</a>
+        <a href="sistemas.html#sis-005">Painel de Empenhos</a>
+        <a href="iv-games.html#gameon">GameON</a>
+      </div>
+      <div class="foot-col">
+        <b>Contato</b>
+        <a href="https://wa.me/5531996715639" target="_blank" rel="noopener">WhatsApp direto</a>
+        <a href="contato.html">Abrir um chamado</a>
+      </div>
+    </div>
+    <div class="colofao">
+      <span>IV·SOLUÇÕES — BELO HORIZONTE · MG</span>
+      <span>ESTE SITE TAMBÉM É UM SISTEMA DA CASA</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal-overlay" id="palOverlay" role="dialog" aria-modal="true" aria-label="Paleta de comando">
+  <div class="pal">
+    <input id="palInput" type="text" placeholder="Digite para buscar — sistemas, games, contato…" autocomplete="off">
+    <div class="pal-list" id="palList"></div>
+  </div>
+</div>
+
+<script src="iv.js"></script>
+</body>
+</html>
