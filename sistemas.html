@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas — IV Soluções</title>
+<meta name="description" content="Os sistemas da IV Soluções em operação: SIEM, IV Home, ChronoMed, Órion, Painel de Empenhos e GameON — cada um com o problema real, o que roda e o fato técnico por trás.">
+<meta property="og:title" content="Sistemas — IV Soluções">
+<meta property="og:description" content="5 sistemas em produção, 1 em construção. Fichas completas com telas reais.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2301284F'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='%23F2F7FD' text-anchor='middle'%3Eiv%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="iv.css">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="marca" href="index.html"><span class="selo">iv</span><b>IV·Soluções</b></a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="sistemas.html" class="on">Sistemas</a>
+      <a href="iv-games.html" class="games-link">IV Games</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div class="top-right">
+      <span class="led"><i></i><span>OPERAÇÃO</span></span>
+      <span class="clock" id="clock" aria-hidden="true">--:--:--</span>
+      <a class="cta-top" href="https://wa.me/5531996715639" target="_blank" rel="noopener">Fale conosco</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu">
+  <a href="index.html">Início</a>
+  <a href="sistemas.html" class="on">Sistemas</a>
+  <a href="iv-games.html" class="games-link">IV Games</a>
+  <a href="sobre.html">Sobre</a>
+  <a href="contato.html">Contato</a>
+</nav>
+
+<main>
+  <section class="section">
+    <div class="wrap">
+      <span class="eyebrow sr">Sistemas · 6 registros</span>
+      <h1 class="h-page sr">Construídos para operações que não podem parar<span class="fim">.</span></h1>
+      <p class="lead sr">Cada ficha traz o problema real, o que roda hoje e um fato técnico verificável. Telas sempre com dados fictícios ou sintéticos — <b>nunca dado de cliente</b>.</p>
+
+      <article class="mod sr" id="sis-001">
+        <div class="mod-head">
+          <div><span class="num">SIS-001 · GESTÃO HOSPITALAR</span><h2>SIEM — Excelência Médica</h2><p class="sub">Gestão de excelência para a operação de saúde</p></div>
+          <span class="status prod"><i></i>Em produção</span>
+        </div>
+        <div class="ficha">
+          <div class="campo"><span class="rot">O problema</span><p>Excelência de operação hospitalar medida por achismo.</p></div>
+          <div class="campo"><span class="rot">O que roda</span><p>Índice de excelência de 0 a 100 por competência, ordens de serviço e indicadores no navegador da gestão.</p></div>
+          <div class="campo"><span class="rot">Por trás</span><p class="tech">Metodologia versionada por vigência: mudar a régua hoje jamais recalcula o passado. Histórico imutável por doutrina.</p></div>
+        </div>
+        <p class="mod-nota">Sistema com dado clínico sensível — a tela de demonstração (dados fictícios) está em preparação e entra aqui quando aprovada. Nenhuma tela com dado real será publicada.</p>
+      </article>
+
+      <article class="mod sr" id="sis-002">
+        <div class="mod-head">
+          <div><span class="num">SIS-002 · CONDOMÍNIO</span><h2>IV Home</h2><p class="sub">Condomínio digital — morador e síndico</p></div>
+          <span class="status prod"><i></i>Em produção</span>
+        </div>
+        <div class="ficha">
+          <div class="campo"><span class="rot">O problema</span><p>Condomínio administrado por papel, mural e grupo de WhatsApp.</p></div>
+          <div class="campo"><span class="rot">O que roda</span><p>App do morador — ouvidoria, reservas, O.S., comunicados — e painel do síndico, com push no celular.</p></div>
+          <div class="campo"><span class="rot">Por trás</span><p class="tech">Isolamento por condomínio imposto no nível do banco (RLS): a regra vale mesmo se a aplicação errar.</p></div>
+        </div>
+        <p class="mod-nota">Tela de demonstração com unidade fictícia em preparação. Dado de morador jamais aparece nesta página.</p>
+      </article>
+
+      <article class="mod sr" id="sis-003">
+        <div class="mod-head">
+          <div><span class="num">SIS-003 · PONTO MÉDICO</span><h2>ChronoMed</h2><p class="sub">Ponto e escalas para equipes médicas</p></div>
+          <span class="status prod"><i></i>Em produção</span>
+        </div>
+        <div class="ficha">
+          <div class="campo"><span class="rot">O problema</span><p>Plantão médico sem prova objetiva de presença.</p></div>
+          <div class="campo"><span class="rot">O que roda</span><p>Registro de ponto biométrico com localização e escala de plantões — do celular ao relatório da gestão.</p></div>
+          <div class="campo"><span class="rot">Por trás</span><p class="tech">Validação de localização no ato do registro e trilha de auditoria de cada batida.</p></div>
+        </div>
+        <p class="mod-nota">Tela de demonstração com equipe fictícia em preparação.</p>
+      </article>
+
+      <article class="mod sr" id="sis-004">
+        <div class="mod-head">
+          <div><span class="num">SIS-004 · IA CORPORATIVA</span><h2>Órion</h2><p class="sub">IA sobre o conhecimento da empresa</p></div>
+          <span class="status prod"><i></i>Em produção</span>
+        </div>
+        <div class="ficha">
+          <div class="campo"><span class="rot">O problema</span><p>O conhecimento da empresa preso em PDFs que ninguém acha.</p></div>
+          <div class="campo"><span class="rot">O que roda</span><p>Assistente de IA que responde com os documentos internos da operação — catálogo, norma, procedimento.</p></div>
+          <div class="campo"><span class="rot">Por trás</span><p class="tech">Busca semântica sobre a base da própria empresa (RAG), medida contra um conjunto-ouro antes de cada mudança.</p></div>
+        </div>
+        <p class="mod-nota">Em breve nesta página: converse com uma versão do Órion treinada nos materiais públicos da IV.</p>
+      </article>
+
+      <article class="mod sr" id="sis-005">
+        <div class="mod-head">
+          <div><span class="num">SIS-005 · LICITAÇÕES E EMPENHOS</span><h2>Painel de Empenhos</h2><p class="sub">Compras públicas sob controle</p></div>
+          <span class="status prod"><i></i>Em produção</span>
+        </div>
+        <div class="ficha">
+          <div class="campo"><span class="rot">O problema</span><p>Licitações e empenhos controlados em planilhas paralelas.</p></div>
+          <div class="campo"><span class="rot">O que roda</span><p>Painel único de empenhos e pedidos com indicadores em tempo real — da mesa do gestor à TV da operação.</p></div>
+          <div class="campo"><span class="rot">Por trás</span><p class="tech">Linguagem visual própria de TV corporativa, com contraste de acessibilidade verificado a cada build.</p></div>
+        </div>
+        <p class="mod-nota">Tela de demonstração com fornecedores fictícios em preparação.</p>
+      </article>
+
+      <article class="mod sr" id="sis-006">
+        <div class="mod-head">
+          <div><span class="num">SIS-006 · GAMIFICAÇÃO DE VENDAS</span><h2>GameON</h2><p class="sub">O primeiro título do IV Games</p></div>
+          <span class="status build"><i></i>Em construção</span>
+        </div>
+        <div class="ficha">
+          <div class="campo"><span class="rot">O problema</span><p>Meta de vendas que ninguém vê — e ninguém vibra.</p></div>
+          <div class="campo"><span class="rot">O que roda</span><p>Campeonato entre times com placar em TV de estádio, moeda interna e loja de prêmios.</p></div>
+          <div class="campo"><span class="rot">Por trás</span><p class="tech">Motor de pontos versionado por vigência e razão contábil de dupla entrada: nada some, nada duplica.</p></div>
+        </div>
+        <div class="mod-telas">
+          <div data-plx>
+            <div class="janela">
+              <div class="jbar" aria-hidden="true"><span class="jselo">iv</span><span class="reg">REG-01</span><span class="jtit">GameON — modo TV</span><span class="jled demo"><i></i>DEMO</span></div>
+              <img src="assets/caso-gameon-tv.jpg" alt="TV de estádio do GameON com placar do campeonato" loading="lazy">
+            </div>
+            <p class="legenda">↑ TV de estádio — dados fictícios, motor real.</p>
+          </div>
+          <div>
+            <div class="janela">
+              <div class="jbar" aria-hidden="true"><span class="jselo">iv</span><span class="reg">REG-02</span><span class="jtit">GameON — pódio da temporada</span><span class="jled demo"><i></i>DEMO</span></div>
+              <img src="assets/caso-gameon-podio.jpg" alt="Pódio do GameON com os três primeiros da temporada" loading="lazy">
+            </div>
+            <p class="legenda">↑ Pódio — celebração de topo; ranking completo privado por desenho.</p>
+          </div>
+        </div>
+        <p class="mod-nota">O GameON vive na divisão de jogos da casa — <a href="iv-games.html" style="color:var(--vivo-txt);font-weight:600;">conheça o IV Games →</a></p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="marca" href="index.html"><span class="selo">iv</span><b>IV·Soluções</b></a>
+        <p class="foot-tag">Projetamos, construímos e operamos sistemas para o mundo real — de Belo Horizonte.</p>
+      </div>
+      <div class="foot-col">
+        <b>Site</b>
+        <a href="index.html">Início</a>
+        <a href="sistemas.html">Sistemas</a>
+        <a href="iv-games.html">IV Games</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+        <a href="privacidade/">Privacidade</a>
+      </div>
+      <div class="foot-col">
+        <b>Sistemas</b>
+        <a href="sistemas.html#sis-001">SIEM</a>
+        <a href="sistemas.html#sis-002">IV Home</a>
+        <a href="sistemas.html#sis-003">ChronoMed</a>
+        <a href="sistemas.html#sis-004">Órion</a>
+        <a href="sistemas.html#sis-005">Painel de Empenhos</a>
+        <a href="iv-games.html#gameon">GameON</a>
+      </div>
+      <div class="foot-col">
+        <b>Contato</b>
+        <a href="https://wa.me/5531996715639" target="_blank" rel="noopener">WhatsApp direto</a>
+        <a href="contato.html">Abrir um chamado</a>
+      </div>
+    </div>
+    <div class="colofao">
+      <span>IV·SOLUÇÕES — BELO HORIZONTE · MG</span>
+      <span>ESTE SITE TAMBÉM É UM SISTEMA DA CASA</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+</footer>
+
+<div class="pal-overlay" id="palOverlay" role="dialog" aria-modal="true" aria-label="Paleta de comando">
+  <div class="pal">
+    <input id="palInput" type="text" placeholder="Digite para buscar — sistemas, games, contato…" autocomplete="off">
+    <div class="pal-list" id="palList"></div>
+  </div>
+</div>
+
+<script src="iv.js"></script>
+</body>
+</html>
