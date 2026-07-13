@@ -287,22 +287,25 @@
     panel.setAttribute("role", "dialog");
     panel.setAttribute("aria-label", "Byte — atendimento IV");
     panel.innerHTML =
-      '<div class="byte-head">' + MINI + '<div><b>Byte · Atendimento IV</b><small>● ONLINE — EM TREINAMENTO</small></div><button type="button" class="byte-x" aria-label="Fechar">×</button></div>' +
+      '<div class="byte-head">' + MINI + '<div><b>Byte · Atendimento IV</b><small>● ONLINE</small></div><button type="button" class="byte-x" aria-label="Fechar">×</button></div>' +
       '<div class="byte-corpo">' +
-      '<div class="byte-balao">Oi! Eu sou o <b>Byte</b> 👋 Ainda estou aprendendo a conversar — enquanto isso, te levo direto aonde você precisa:</div>' +
+      '<div class="byte-msgs" aria-live="polite">' +
+      '<div class="byte-balao">Oi! Eu sou o <b>Byte</b> 👋 Posso te contar sobre os sistemas e o que a IV constrói. Pergunta aqui embaixo — ou vai direto:</div>' +
+      "</div>" +
       '<div class="byte-acoes">' +
       '<a class="byte-acao" href="https://wa.me/5531996715639" target="_blank" rel="noopener">💬 Falar com a IV no WhatsApp<span class="seta">→</span></a>' +
       '<a class="byte-acao" href="sistemas.html">🖥️ Conhecer os sistemas<span class="seta">→</span></a>' +
       '<a class="byte-acao" href="iv-games.html">🎮 Entrar no IV Games<span class="seta">→</span></a>' +
       "</div></div>" +
-      '<div class="byte-foot">byte//v0 · quem responde no WhatsApp é quem constrói</div>';
+      '<form class="byte-form"><input type="text" name="q" maxlength="1000" placeholder="Escreva sua pergunta…" autocomplete="off" data-lpignore="true" data-1p-ignore data-form-type="other" aria-label="Sua pergunta para o Byte"><button type="submit" class="byte-envia" aria-label="Enviar">→</button></form>' +
+      '<div class="byte-foot">byte//v1 · IA da IV — pode errar; o WhatsApp confirma</div>';
     document.body.appendChild(btn);
     document.body.appendChild(panel);
     var abrirB = function () {
       panel.classList.add("on");
       btn.setAttribute("aria-expanded", "true");
-      var x = panel.querySelector(".byte-x");
-      if (x) { x.focus(); }
+      var inp = panel.querySelector(".byte-form input");
+      if (inp) { inp.focus(); }
     };
     var fecharB = function () {
       panel.classList.remove("on");
@@ -318,6 +321,83 @@
     });
     document.addEventListener("click", function (e) {
       if (panel.classList.contains("on") && !panel.contains(e.target) && !btn.contains(e.target)) { fecharB(); }
+    });
+
+    /* ── conversa real com a IA (POST /api/chat) ── */
+    var corpo = panel.querySelector(".byte-corpo"); // o container rolável
+    var msgs = panel.querySelector(".byte-msgs");
+    var form = panel.querySelector(".byte-form");
+    var input = form.querySelector("input");
+    var envia = form.querySelector(".byte-envia");
+    var historico = [];
+    var aguardando = false;
+
+    // Bolhas SEMPRE via textContent — texto de usuário/IA nunca vira HTML.
+    function bolha(texto, minha) {
+      var el = document.createElement("div");
+      el.className = "byte-msg" + (minha ? " eu" : "");
+      el.textContent = texto;
+      msgs.appendChild(el);
+      corpo.scrollTop = corpo.scrollHeight;
+      return el;
+    }
+    function bolhaErro() {
+      var el = document.createElement("div");
+      el.className = "byte-msg";
+      el.appendChild(document.createTextNode("Tive um problema para responder agora. Fala com a gente direto no "));
+      var a = document.createElement("a");
+      a.href = "https://wa.me/5531996715639";
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "WhatsApp (31) 99671-5639";
+      el.appendChild(a);
+      el.appendChild(document.createTextNode(" — todos os dias, 07h às 22h."));
+      msgs.appendChild(el);
+      corpo.scrollTop = corpo.scrollHeight;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var texto = (input.value || "").trim();
+      if (!texto || aguardando) { return; }
+      input.value = "";
+      bolha(texto, true);
+      historico.push({ role: "user", content: texto });
+
+      aguardando = true;
+      envia.disabled = true;
+      var dig = document.createElement("div");
+      dig.className = "byte-msg byte-digitando";
+      dig.setAttribute("aria-label", "Byte está digitando");
+      dig.innerHTML = "<i></i><i></i><i></i>";
+      msgs.appendChild(dig);
+      corpo.scrollTop = corpo.scrollHeight;
+
+      var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 25000) : null;
+
+      fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: historico.slice(-10) }),
+        signal: ctrl ? ctrl.signal : undefined
+      })
+        .then(function (r) { if (!r.ok) { throw new Error("HTTP " + r.status); } return r.json(); })
+        .then(function (d) {
+          if (!d || typeof d.reply !== "string") { throw new Error("resposta vazia"); }
+          historico.push({ role: "assistant", content: d.reply });
+          dig.remove();
+          bolha(d.reply, false);
+        })
+        .catch(function () {
+          dig.remove();
+          bolhaErro();
+        })
+        .then(function () {
+          if (timer) { clearTimeout(timer); }
+          aguardando = false;
+          envia.disabled = false;
+        });
     });
   })();
 
