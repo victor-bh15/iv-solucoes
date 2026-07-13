@@ -67,6 +67,19 @@ REGRAS RÍGIDAS (nunca quebre):
 BASE DE CONHECIMENTO:
 ${KNOWLEDGE}`;
 
+// fetch com timeout do LADO DO SERVIDOR: sem isso, um provedor pendurado
+// prende o handler e o fallback Gemini→DeepSeek nunca dispara (achado CodeRabbit).
+const PROVIDER_TIMEOUT_MS = 12_000;
+async function fetchComTimeout(url, opts) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), PROVIDER_TIMEOUT_MS);
+  try {
+    return await fetch(url, { ...opts, signal: ctrl.signal });
+  } finally {
+    clearTimeout(t);
+  }
+}
+
 // ── Provedor 1 (primário): Google Gemini ────────────────────────────────────
 async function askGemini(messages) {
   const key = process.env.GEMINI_API_KEY;
@@ -75,7 +88,7 @@ async function askGemini(messages) {
     role: m.role === "assistant" ? "model" : "user",
     parts: [{ text: m.content }],
   }));
-  const res = await fetch(
+  const res = await fetchComTimeout(
     // chave no HEADER (x-goog-api-key), nunca na URL — URL vaza em log de proxy
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
     {
@@ -97,7 +110,7 @@ async function askGemini(messages) {
 async function askDeepSeek(messages) {
   const key = process.env.DEEPSEEK_API_KEY;
   if (!key) return null;
-  const res = await fetch("https://api.deepseek.com/chat/completions", {
+  const res = await fetchComTimeout("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
     body: JSON.stringify({
@@ -153,6 +166,7 @@ export default async function handler(req, res) {
         (m) =>
           !!m &&
           typeof m.content === "string" &&
+          m.content.trim().length > 0 && // rejeita vazio/só-espaço (achado CodeRabbit)
           (m.role === "user" || m.role === "assistant"),
       )
       .slice(-10)
