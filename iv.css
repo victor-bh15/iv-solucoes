@@ -14,7 +14,8 @@
   --vivo-txt: #C2410C;
   --ok: #0E7A3D;
   --hair: #DEE3EA;
-  --games: #7A5CF6; /* acento do palco IV GAMES (identidade GameON) */
+  --games: #7A5CF6; /* acento do palco IV GAMES (identidade GameON) — decorativo/não-texto */
+  --games-acao: #6D4EF0; /* mesmo roxo, escurecido p/ carregar texto branco em AA (o --games dá 4,48:1, reprova por 0,02) */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -176,8 +177,8 @@ main { padding-top: 60px; }
 .btn-navy:hover { background: var(--vivo-txt); }
 .btn-line { border: 1.5px solid var(--hair); background: var(--panel); color: var(--navy); }
 .btn-line:hover { border-color: var(--navy); }
-.btn-games { background: var(--games); color: #FFF; }
-.btn-games:hover { background: #6847E8; }
+.btn-games { background: var(--games-acao); color: #FFF; }
+.btn-games:hover { background: #5B37D8; }
 .cta-row { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
 
 /* Janela placa IV (chrome proprietário) */
