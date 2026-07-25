@@ -1,2 +1,7 @@
 .vercel
 node_modules/
+
+# Segredos (nunca commitar) - blindagem 25/07/2026
+.env
+.env.*
+!.env.example
